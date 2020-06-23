@@ -1,0 +1,29 @@
+#
+# Command aliases
+#
+
+alias ....='cd ../..'
+alias :e=vim
+alias :qa=exit
+alias :sp='test -n "$TMUX" && tmux split-window'
+alias :vs='test -n "$TMUX" && tmux split-window -h'
+alias :wq=exit
+alias cd..='cd ..'
+alias e=exit
+alias f='find . -name'
+alias g=git
+alias h=history
+alias l='ls -F'
+alias ls='ls --color=auto'
+alias diff='diff --color=auto'
+alias ll='ls -laF'
+alias s=ssh
+alias t=tmux
+alias v=vim
+
+#
+# Global aliases
+# (work at any position within the command line)
+#
+
+
