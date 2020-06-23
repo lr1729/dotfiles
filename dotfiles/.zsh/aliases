@@ -12,6 +12,9 @@ alias cd..='cd ..'
 alias e=exit
 alias f='find . -name'
 alias g=git
+alias ga='git add'
+alias gaa='git add --all'
+alias gc='git commit -v'
 alias h=history
 alias l='ls -F'
 alias ls='ls --color=auto'
