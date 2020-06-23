@@ -1,0 +1,3 @@
+[submodule "dotfiles/dotfiles/.vim/bundle/nvim-lsp"]
+	path = dotfiles/dotfiles/.vim/bundle/nvim-lsp
+	url = https://github.com/neovim/nvim-lsp
