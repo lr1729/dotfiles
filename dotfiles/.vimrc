@@ -10,6 +10,7 @@ augroup highlight_yank
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("Substitute", 200)
 augroup END
 "Add Vundle to runtime path
+set termguicolors
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'

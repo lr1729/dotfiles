@@ -206,7 +206,7 @@ HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 # Bindings
 #
 
-bindkey -e # emacs bindings, set to -v for vi bindings
+bindkey -v # emacs bindings, set to -v for vi bindings
 
 # Use "cbt" capability ("back_tab", as per `man terminfo`), if we have it:
 if tput cbt &> /dev/null; then
