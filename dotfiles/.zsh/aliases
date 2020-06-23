@@ -16,6 +16,15 @@ alias ga='git add'
 alias gaa='git add --all'
 alias gc='git commit -m'
 alias gp='git push'
+alias rm='trash'
+function ccsv() {
+    mcs -out:"$1" "$1.cs"
+    mono "$1"
+}
+function ccs() {
+    mcs -out:"$1" "$1.cs"
+}
+alias mcs -out:hello.exe hello.cs
 function gacp() {
     git add .
     git commit -a -m "$1"

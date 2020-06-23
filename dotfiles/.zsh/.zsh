@@ -1,1 +1,1 @@
-dotfiles/dotfiles/.zsh
+/home/ling/dotfiles/dotfiles/.zsh
