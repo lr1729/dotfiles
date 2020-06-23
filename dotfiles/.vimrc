@@ -1,6 +1,7 @@
 set number relativenumber
 set autoindent
 set clipboard+=unnamedplus
+tnoremap <Esc> <C-\><C-n>
 filetype off
 colorscheme apprentice
 let g:airline_powerline_fonts = 1
