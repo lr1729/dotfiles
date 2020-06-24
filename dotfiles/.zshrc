@@ -203,6 +203,9 @@ bindkey -M vicmd 'j' history-substring-search-down
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^x^x' edit-command-line
+bindkey -v # Vim kyebinds
+bindkey jj vi-cmd-mode
+export KEYTIMEOUT=20 # Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
 
 bindkey ' ' magic-space # do history expansion on space
 
@@ -210,7 +213,6 @@ bindkey ' ' magic-space # do history expansion on space
 # These are the same but permit patterns (eg. a*b) to be used.
 bindkey "^r" history-incremental-pattern-search-backward
 bindkey "^s" history-incremental-pattern-search-forward
-
 # Make CTRL-Z background things and unbackground them.
 function fg-bg() {
   if [[ $#BUFFER -eq 0 ]]; then
