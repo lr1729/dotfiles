@@ -24,7 +24,6 @@ let g:ale_linters = {
 \}
 
 " Keymaps
-
 " Switch j and k for better colemak navigation
 inoremap jj <ESC>
 tnoremap <Esc> <C-\><C-n>
@@ -36,6 +35,8 @@ nnoremap <Space> i_<Esc>r
 map <C-o> :NERDTreeToggle<CR>
 inoremap <expr> <Tab> pumvisible() ? '<C-n>' :
 \ getline('.')[col('.')-2] =~# '[[:alnum:].-_#$]' ? '<C-x><C-o>' : '<Tab>'
+" Map Ctrl + p to open fuzzy find (FZF)
+nnoremap <c-p> :Files<cr>
 
 " Appearance
 colorscheme apprentice
