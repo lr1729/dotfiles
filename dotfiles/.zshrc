@@ -81,24 +81,6 @@ zstyle ':vcs_info:hg*:*' get-mq false
 zstyle ':vcs_info:hg*+gen-hg-bookmark-string:*' hooks hg-bookmarks
 zstyle ':vcs_info:hg*+se-message:*' hooks hg-message
 
-function +vi-hg-bookmarks() {
-  emulate -L zsh
-  if [[ -n "${hook_com[hg-active-bookmark]}" ]]; then
-    hook_com[hg-bookmark-string]="${(Mj:,:)@}"
-    ret=1
-  fi
-}
-
-function +vi-hg-message() {
-  emulate -L zsh
-
-  # Suppress hg branch display if we can display a bookmark instead.
-  if [[ -n "${hook_com[misc]}" ]]; then
-    hook_com[branch]=''
-  fi
-  return 0
-}
-
 function +vi-git-untracked() {
   emulate -L zsh
   if [[ -n $(git ls-files --exclude-standard --others 2> /dev/null) ]]; then
@@ -205,8 +187,6 @@ HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 #
 # Bindings
 #
-
-bindkey -v # emacs bindings, set to -v for vi bindings
 
 # Use "cbt" capability ("back_tab", as per `man terminfo`), if we have it:
 if tput cbt &> /dev/null; then
@@ -398,12 +378,3 @@ zstyle ':completion:*:*:cdr:*:*' menu selection
 
 # fall through to cd if cdr is passed a non-recent dir as an argument
 zstyle ':chpwd:*' recent-dirs-default true
-
-# Local and host-specific overrides.
-
-LOCAL_RC=$HOME/.zshrc.local
-test -f $LOCAL_RC && source $LOCAL_RC
-
-HOST_RC=$HOME/.zsh/host/$(hostname -s | tr '[:upper:]' '[:lower:]')
-test -f $HOST_RC && source $HOST_RC
-

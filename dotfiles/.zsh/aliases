@@ -1,7 +1,10 @@
 #
 # Command aliases
 #
-
+alias cn='screen -r'
+alias cf='screen -x'
+alias aws='ssh ling@100.25.109.81'
+alias aws2='ssh ling@18.224.40.135'
 alias ....='cd ../..'
 alias :e=vim
 alias :qa=exit
