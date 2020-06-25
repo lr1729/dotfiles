@@ -23,12 +23,30 @@ let g:ale_linters = {
 \ 'cs': ['OmniSharp']
 \}
 
-" Keymaps
+" ===========
+" = KEYMAPS =
+" ===========
+
 " Switch j and k for better colemak navigation
-inoremap jj <ESC>
-tnoremap <Esc> <C-\><C-n>
 noremap j k
 noremap k j
+" Easier keybinds to move terminals (j and k switched)
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-k> <C-\><C-N><C-w>j
+tnoremap <A-j> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-k> <C-\><C-N><C-w>j
+inoremap <A-j> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-k> <C-w>j
+nnoremap <A-j> <C-w>k
+nnoremap <A-l> <C-w>l
+" use jj instead of esc
+inoremap jj <ESC>
+" Esc also exits terminal mode
+tnoremap <Esc> <C-\><C-n>
 " space inserts a single character
 nnoremap <Space> i_<Esc>r
 " Control o opens nerdtree
@@ -37,6 +55,11 @@ inoremap <expr> <Tab> pumvisible() ? '<C-n>' :
 \ getline('.')[col('.')-2] =~# '[[:alnum:].-_#$]' ? '<C-x><C-o>' : '<Tab>'
 " Map Ctrl + p to open fuzzy find (FZF)
 nnoremap <c-p> :Files<cr>
+" Lose the arrow keys
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use j"<CR>
+nnoremap <Down> :echoe "Use k"<CR>
 
 " Appearance
 colorscheme apprentice
@@ -52,32 +75,18 @@ set clipboard+=unnamedplus " Uses System clipboard instead of vim buffer
 set nocompatible
 set mouse=a " Can use mouse for yanking
 set backspace=2   " Backspace deletes like most programs in insert mode
-
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
 autocmd VimResized * wincmd =
-
-" Quicker window movement (j and k switched for colemak)
-nnoremap <C-k> <C-w>j
-nnoremap <C-j> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-
 set nojoinspaces
 set whichwrap+=<,>,h,l,[,] " Wrap lines with arrow keys and hl
 set scrolloff=4 " Keeps 4 lines on edges visible when scrolling
 set title
-
-" Lose the arrow keys
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use j"<CR>
-nnoremap <Down> :echoe "Use k"<CR>
-
+autocmd TermOpen * startinsert " Automatically enter insert mode when entering a terminal window in nvim
+autocmd BufEnter,BufEnter term://* startinsert
 augroup vimrcEx
   autocmd!
-
   " When editing a file, always jump to the last known cursor position.
   " Don't do it for commit messages, when the position is invalid, or when
   " inside an event handler (happens when dropping a file on gvim).
