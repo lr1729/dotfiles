@@ -76,15 +76,15 @@ set nocompatible
 set mouse=a " Can use mouse for yanking
 set backspace=2   " Backspace deletes like most programs in insert mode
 " Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
+set splitbelow " Opens new buffers below
+set splitright " Opens new buffers to the right
 autocmd VimResized * wincmd =
 set nojoinspaces
 set whichwrap+=<,>,h,l,[,] " Wrap lines with arrow keys and hl
 set scrolloff=4 " Keeps 4 lines on edges visible when scrolling
-set title
+set title " Sets title of terminal
 autocmd TermOpen * startinsert " Automatically enter insert mode when entering a terminal window in nvim
-autocmd BufEnter,BufEnter term://* startinsert
+autocmd BufEnter,BufEnter term://* startinsert " Same as above but it actually works
 augroup vimrcEx
   autocmd!
   " When editing a file, always jump to the last known cursor position.
@@ -108,9 +108,11 @@ augroup END
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-"""""""""""""""""""""""
-"" Add new plugins here
-"""""""""""""""""""""""
+
+" ========================
+" = Add new plugins here =
+" ========================
+
 Plugin 'Shougo/vimproc.vim'
 Plugin 'tpope/vim-dispatch'
 Plugin 'scrooloose/nerdtree'
@@ -121,9 +123,10 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'flazz/vim-colorschemes' 
 Plugin 'neovim/nvim-lsp'
-"""""""""""""""""""""""
-"" End of plugin list
-"""""""""""""""""""""""
+
+" ======================
+" = End of plugin list =
+" ======================
 call vundle#end()
 
 " Post Vundle Configuration
