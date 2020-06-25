@@ -1,6 +1,0 @@
-[submodule "dotfiles/.vim/bundle/omnisharp-vim"]
-	path = dotfiles/.vim/bundle/omnisharp-vim
-	url = https://github.com/OmniSharp/omnisharp-vim
-[submodule "dotfiles/.vim/bundle/nerdtree"]
-	path = dotfiles/.vim/bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree
