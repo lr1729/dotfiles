@@ -1,6 +1,9 @@
 set encoding=utf-8
 
-" Spacing
+" ===========
+" = Spacing =
+" ===========
+
 set autoindent " Automatically indents lines
 filetype indent plugin on " 
 set list listchars=tab:»·,trail:·,nbsp:·  " Show extra whitespace
@@ -8,14 +11,20 @@ set tabstop=2
 set shiftwidth=2 " Set tabs to 4 spaces
 set expandtab
 
-" Searching
+" =============
+" = Searching =
+" =============
+
 set number relativenumber " Relative line numbers are nice
 set hlsearch " Highlight searches
 set incsearch " Incremental Search
 set ignorecase 
 set smartcase " Smart case-insensitive searching
 
-" Syntax
+" ==========
+" = Syntax =
+" ==========
+
 syntax on
 let g:airline#extensions#ale#enabled = 1
 let g:OmniSharp_server_stdio = 1
@@ -61,7 +70,10 @@ nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use j"<CR>
 nnoremap <Down> :echoe "Use k"<CR>
 
-" Appearance
+" ==============
+" = Appearance =
+" ==============
+
 colorscheme apprentice
 let g:airline_powerline_fonts = 1
 set termguicolors " True 24 bit colors for nvim
@@ -70,7 +82,10 @@ augroup highlight_yank
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("Substitute", 200)
 augroup END " Highlight yanked text
 
-" Other
+" =========
+" = Other =
+" =========
+
 set clipboard+=unnamedplus " Uses System clipboard instead of vim buffer
 set nocompatible
 set mouse=a " Can use mouse for yanking
@@ -127,9 +142,12 @@ Plugin 'neovim/nvim-lsp'
 " ======================
 " = End of plugin list =
 " ======================
+
 call vundle#end()
 
-" Post Vundle Configuration
+" =============================
+" = Post Vundle Configuration =
+" =============================
 
 " Transparent background
 hi Normal guibg=NONE ctermbg=NONE 
