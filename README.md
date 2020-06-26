@@ -1,2 +1,2 @@
 # Dotfiles
-Configuration repository for zsh, vim, tmux, nvim, etc
+Don't make a frankendebian, but do make frankendotfiles
