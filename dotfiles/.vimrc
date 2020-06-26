@@ -5,7 +5,7 @@ set encoding=utf-8
 " ===========
 
 set autoindent " Automatically indents lines
-set list listchars=tab:»·,trail:·,nbsp:·  " Show extra whitespace and differentiate tabs from spaces
+set list listchars=tab:»·,trail:·,nbsp:· " Show extra whitespace and differentiate tabs from spaces
 set tabstop=2 " Set tabs to 2 spaces
 set shiftwidth=2 " Also set tabs to 2 spaces
 set expandtab " Uses tabs instaed of spaces
@@ -25,9 +25,12 @@ set smartcase " Unless it starts with a capital
 " = Syntax =
 " ==========
 
-syntax on " Turns on syntax highlighting
-let g:airline#extensions#ale#enabled = 1
-let g:OmniSharp_server_stdio = 1
+set omnifunc=ale#completion#OmniFunc " Let's ALE handle completion instead of omni
+let g:ale_completion_enabled = 1
+let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
+let g:OmniSharp_server_stdio = 1 " Use the async Roslyn server
+let g:OmniSharp_highlighting = 3 " Use OmniSharp highlighting for c# files
+let g:OmniSharp_server_loading_timeout = 0 " Fix timeout when opening single c# files
 
 " ===========
 " = KEYMAPS =
@@ -60,7 +63,9 @@ map <C-o> :NERDTreeToggle<CR>
 " Move between linting errors
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
-" Tab completion will insert tab at beginning of line, and use completion if not at beginning
+" Tab completion
+" will insert tab at beginning of line,
+" will use completion if not at beginning
 set wildmode=list:longest,list:full
 function! InsertTabWrapper()
     let col = col('.') - 1
@@ -84,10 +89,10 @@ nnoremap <Down> :echoe "Use k"<CR>
 " = Appearance =
 " ==============
 
-colorscheme apprentice
+colorscheme apprentice " Cool color scheme
 let g:airline_powerline_fonts = 1 " Adds cool arrows to airline
 set termguicolors " True 24 bit colors for nvim
-augroup highlight_yank " Highlight yanked text
+augroup highlight_yank " Flash yanked text
     autocmd!
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("Substitute", 200)
 augroup END 
@@ -109,6 +114,10 @@ set scrolloff=4 " Keeps 4 lines on edges visible when scrolling
 set title " Sets title of terminal
 autocmd TermOpen * startinsert " Automatically enter insert mode when entering a terminal window in nvim
 autocmd BufEnter,BufEnter term://* startinsert " Same as above but it actually works
+let g:hardtime_default_on = 1 " Run hardtime in all buffers by default
+let g:hardtime_ignore_buffer_patterns = [ "CustomPatt[ae]rn", "NERD.*" ] " Don't run in NERDtree
+let g:hardtime_ignore_quickfix = 1 " Ignore quickfix window
+let g:hardtime_allow_different_key = 1 " Allow consecutive different keys
 augroup vimrcEx
   autocmd!
   " When editing a file, always jump to the last known cursor position.
@@ -128,7 +137,8 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile vimrc.local set filetype=vim
 augroup END
 set nocompatible " Not sure about this
-filetype off
+filetype off " Omnisharp breaks without this for some reason
+
 "Add Vundle to runtime path
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -141,13 +151,16 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'tpope/vim-dispatch'
 Plugin 'scrooloose/nerdtree'
-Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'inside/vim-search-pulse'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'flazz/vim-colorschemes' 
 Plugin 'dense-analysis/ale'
 Plugin 'junegunn/fzf.vim'
+Plugin 'takac/vim-hardtime'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'OmniSharp/omnisharp-vim'
+
 
 " ======================
 " = End of plugin list =
@@ -161,5 +174,5 @@ call vundle#end()
 
 " Transparent background
 hi Normal guibg=NONE ctermbg=NONE 
+syntax on " Turns on syntax highlighting
 filetype indent plugin on " Not sure why this is needed
-
