@@ -17,7 +17,7 @@ set expandtab " Tabs turn into spaces
 set number relativenumber " Relative line numbers are nice
 set numberwidth=5 " Increases line number margins
 set hlsearch " Highlight searches
-set incsearch " Incremental Search
+set incsearch " Incremental Searchlet g:OmniSharp_loglevel = 'debug'
 set ignorecase " Ignores case when searching 
 set smartcase " Unless it starts with a capital
 
@@ -25,12 +25,12 @@ set smartcase " Unless it starts with a capital
 " = Syntax =
 " ==========
 
-set omnifunc=ale#completion#OmniFunc " Lets ALE handle completion instead of omni
-let g:ale_completion_enabled = 1 " Use ALE completion instead of omni
 let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
 let g:OmniSharp_server_stdio = 1 " Use the async Roslyn server
-let g:OmniSharp_highlighting = 3 " Use OmniSharp highlighting for c# files
+let g:OmniSharp_highlighting = 2 " Use OmniSharp highlighting for c# files
 let g:OmniSharp_server_loading_timeout = 0 " Fix timeout when opening single c# files
+set omnifunc=ale#completion#OmniFunc " Let's ALE handle completion instead of omni
+let g:ale_completion_enabled = 1 " Use ALE completion
 
 " ===========
 " = KEYMAPS =
@@ -54,7 +54,7 @@ nnoremap <A-j> <C-w>k
 nnoremap <A-l> <C-w>l
 " use jj instead of esc
 inoremap jj <ESC>
-" Esc also exits terminal mode
+" Esc also eximts terminal mode
 tnoremap <Esc> <C-\><C-n>
 " space inserts a single character
 nnoremap <Space> i_<Esc>r
@@ -63,9 +63,10 @@ map <C-o> :NERDTreeToggle<CR>
 " Move between linting errors
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
-" Tab completion
-" will insert tab at beginning of line,
-" will use completion if not at beginning
+" Use omnisharp for c# files
+autocmd FileType cs inoremap <expr> <Tab> pumvisible() ? '<C-n>' :
+\ getline('.')[col('.')-2] =~# '[[:alnum:].-_#$]' ? '<C-x><C-o>' : '<Tab>'
+" Use ALE completion otherwise
 set wildmode=list:longest,list:full
 function! InsertTabWrapper()
     let col = col('.') - 1
