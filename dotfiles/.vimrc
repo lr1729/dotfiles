@@ -25,8 +25,8 @@ set smartcase " Unless it starts with a capital
 " = Syntax =
 " ==========
 
-set omnifunc=ale#completion#OmniFunc " Let's ALE handle completion instead of omni
-let g:ale_completion_enabled = 1
+set omnifunc=ale#completion#OmniFunc " Lets ALE handle completion instead of omni
+let g:ale_completion_enabled = 1 " Use ALE completion instead of omni
 let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
 let g:OmniSharp_server_stdio = 1 " Use the async Roslyn server
 let g:OmniSharp_highlighting = 3 " Use OmniSharp highlighting for c# files
