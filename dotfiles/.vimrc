@@ -60,6 +60,12 @@ nnoremap <A-l> <C-w>l
 inoremap jj <ESC>
 " Esc also eximts terminal mode
 tnoremap <Esc> <C-\><C-n>
+" can use \y and \p to yank and paste from clipboard instead of vim buffer,
+" capital is for on select middle button clipboard
+noremap <Leader>y "+y
+noremap <Leader>p "+p
+noremap <Leader>Y "*y
+noremap <Leader>P "*p
 " space inserts a single character
 nnoremap <Space> i_<Esc>r
 " Control o opens nerdtree
@@ -94,7 +100,6 @@ augroup END
 " = Other =
 " =========
 
-set clipboard+=unnamedplus " Uses System clipboard instead of vim buffer
 set mouse=a " Can use mouse for yanking
 set backspace=2   " Backspace deletes like most programs in insert mode
 " Open new split panes to right and bottom, which feels more natural
