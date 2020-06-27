@@ -29,10 +29,12 @@ let g:OmniSharp_server_use_mono = 1
 let g:OmniSharp_highlighting = 2 " Use OmniSharp highlighting for c# files
 let g:OmniSharp_server_stdio = 1 " Use the async Roslyn server
 let g:SuperTabDefaultCompletionType = '<c-n>' "Use basic autocomplete as supertab default
-let g:SuperTabClosePreviewOnPopupClose =1 " Not sure
+let g:SuperTabClosePreviewOnPopupClose = 1 " Not sure
 set omnifunc=ale#completion#OmniFunc " Let's ALE handle completion instead of omni
 let g:ale_completion_enabled = 1 " Use ALE completion
 let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
+set completeopt=longest,menuone "inserts the longest common text of all matches, menu will come up even if there's only one match
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif " Close preview window when completion is done
 
 " ===========
 " = KEYMAPS =
@@ -65,14 +67,11 @@ map <C-o> :NERDTreeToggle<CR>
 " Move between linting errors
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
-" #COC 
+" Uses tab and enter to select completion
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<C-x><C-o>"
 " Map Ctrl + p to open fuzzy find (FZF)
 nnoremap <c-p> :Files<cr>
-" Use tab for autocomplete
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<C-x><C-o>"
 " Lose the arrow keys
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
@@ -133,6 +132,8 @@ augroup vimrcEx
 augroup END
 set nocompatible " Not sure about this
 filetype off " Omnisharp breaks without this for some reason
+set rtp+=~/.vim/bundle/bclose.vim " Adds buffer close script
+
 
 "Add Vundle to runtime path
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -143,8 +144,6 @@ Plugin 'gmarik/Vundle.vim'
 " = Add new plugins here =
 " ========================
 
-Plugin 'Shougo/vimproc.vim'
-Plugin 'tpope/vim-dispatch'
 Plugin 'scrooloose/nerdtree'
 Plugin 'inside/vim-search-pulse'
 Plugin 'vim-airline/vim-airline'
