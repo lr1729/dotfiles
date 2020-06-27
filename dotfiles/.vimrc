@@ -25,12 +25,14 @@ set smartcase " Unless it starts with a capital
 " = Syntax =
 " ==========
 
-let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
-let g:OmniSharp_server_stdio = 1 " Use the async Roslyn server
+let g:OmniSharp_server_use_mono = 1
 let g:OmniSharp_highlighting = 2 " Use OmniSharp highlighting for c# files
-let g:OmniSharp_server_loading_timeout = 0 " Fix timeout when opening single c# files
+let g:OmniSharp_server_stdio = 1 " Use the async Roslyn server
+let g:SuperTabDefaultCompletionType = '<c-n>' "Use basic autocomplete as supertab default
+let g:SuperTabClosePreviewOnPopupClose =1 " Not sure
 set omnifunc=ale#completion#OmniFunc " Let's ALE handle completion instead of omni
 let g:ale_completion_enabled = 1 " Use ALE completion
+let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
 
 " ===========
 " = KEYMAPS =
@@ -63,23 +65,14 @@ map <C-o> :NERDTreeToggle<CR>
 " Move between linting errors
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
-" Use omnisharp for c# files
-autocmd FileType cs inoremap <expr> <Tab> pumvisible() ? '<C-n>' :
-\ getline('.')[col('.')-2] =~# '[[:alnum:].-_#$]' ? '<C-x><C-o>' : '<Tab>'
-" Use ALE completion otherwise
-set wildmode=list:longest,list:full
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<Tab>"
-    else
-        return "\<C-p>"
-    endif
-endfunction
-inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
-inoremap <S-Tab> <C-n>
+" #COC 
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<C-x><C-o>"
 " Map Ctrl + p to open fuzzy find (FZF)
 nnoremap <c-p> :Files<cr>
+" Use tab for autocomplete
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<C-x><C-o>"
 " Lose the arrow keys
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
@@ -108,12 +101,13 @@ set backspace=2   " Backspace deletes like most programs in insert mode
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow " Opens new buffers below
 set splitright " Opens new buffers to the right
-autocmd VimResized * wincmd = " Automatcally resizes buffers on main window resize
 set nojoinspaces " Something about joining lines and spaces
 set whichwrap+=<,>,h,l,[,] " Wrap lines with arrow keys and hl
 set scrolloff=4 " Keeps 4 lines on edges visible when scrolling
 set title " Sets title of terminal
+set hidden " When opening a new buffer it hides old one
 autocmd TermOpen * startinsert " Automatically enter insert mode when entering a terminal window in nvim
+autocmd VimResized * wincmd = " Automatcally resizes buffers on main window resize
 autocmd BufEnter,BufEnter term://* startinsert " Same as above but it actually works
 let g:hardtime_default_on = 1 " Run hardtime in all buffers by default
 let g:hardtime_ignore_buffer_patterns = [ "CustomPatt[ae]rn", "NERD.*" ] " Don't run in NERDtree
@@ -161,7 +155,8 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'takac/vim-hardtime'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'OmniSharp/omnisharp-vim'
-
+Plugin 'ervandew/supertab'
+Plugin 'prabirshrestha/asyncomplete.vim'
 
 " ======================
 " = End of plugin list =
