@@ -132,9 +132,7 @@ augroup vimrcEx
 augroup END
 set nocompatible " Not sure about this
 filetype off " Omnisharp breaks without this for some reason
-set rtp+=~/.vim/bundle/bclose.vim " Adds buffer close script
-
-
+source ~/.vim/bundle/bclose.vim
 "Add Vundle to runtime path
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
