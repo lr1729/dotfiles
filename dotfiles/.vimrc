@@ -30,7 +30,7 @@ let g:OmniSharp_highlighting = 2 " Use OmniSharp highlighting for c# files
 let g:OmniSharp_server_stdio = 1 " Use the async Roslyn server
 let g:SuperTabDefaultCompletionType = '<c-x><c-o>' "Use basic autocomplete as supertab default
 let g:SuperTabClosePreviewOnPopupClose = 1 " Not sure
-set omnifunc=ale#completion#OmniFunc " Let's ALE handle completion instead of omni
+set omnifunc=ale#completion#OmniFunc " Let ALE handle omnicompletion
 let g:ale_completion_enabled = 1 " Use ALE completion
 let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
 set wildmode=list:longest,list:full " Completion type
@@ -158,8 +158,6 @@ Plugin 'takac/vim-hardtime'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'ervandew/supertab'
-Plugin 'prabirshrestha/asyncomplete.vim'
-Plugin 'neovim/nvim-lsp'
 
 " ======================
 " = End of plugin list =
