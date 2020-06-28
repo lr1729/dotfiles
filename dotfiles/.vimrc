@@ -25,15 +25,15 @@ set smartcase " Unless it starts with a capital
 " = Syntax =
 " ==========
 
-let g:OmniSharp_server_use_mono = 1
+let g:OmniSharp_server_use_mono = 1 " Use system mono instead
 let g:OmniSharp_highlighting = 2 " Use OmniSharp highlighting for c# files
 let g:OmniSharp_server_stdio = 1 " Use the async Roslyn server
-let g:SuperTabDefaultCompletionType = '<c-n>' "Use basic autocomplete as supertab default
+let g:SuperTabDefaultCompletionType = '<c-x><c-o>' "Use basic autocomplete as supertab default
 let g:SuperTabClosePreviewOnPopupClose = 1 " Not sure
 set omnifunc=ale#completion#OmniFunc " Let's ALE handle completion instead of omni
 let g:ale_completion_enabled = 1 " Use ALE completion
 let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
-set completeopt=longest,menuone "inserts the longest common text of all matches, menu will come up even if there's only one match
+set wildmode=list:longest,list:full " Completion type
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif " Close preview window when completion is done
 
 " ===========
@@ -74,7 +74,7 @@ map <C-o> :NERDTreeToggle<CR>
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
 " Uses tab and enter to select completion
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<C-x><C-o>"
 " Map Ctrl + p to open fuzzy find (FZF)
 nnoremap <c-p> :Files<cr>
@@ -159,6 +159,7 @@ Plugin 'sheerun/vim-polyglot'
 Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'ervandew/supertab'
 Plugin 'prabirshrestha/asyncomplete.vim'
+Plugin 'neovim/nvim-lsp'
 
 " ======================
 " = End of plugin list =
