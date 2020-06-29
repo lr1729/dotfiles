@@ -158,6 +158,7 @@ Plugin 'takac/vim-hardtime'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'ervandew/supertab'
+Plugin 'prabirshrestha/asyncomplete.vim'
 
 " ======================
 " = End of plugin list =
