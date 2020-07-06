@@ -5,7 +5,8 @@ alias cn='screen -r'
 alias cf='screen -x'
 alias aws='ssh ling@100.25.109.81'
 alias aws2='ssh ling@18.224.40.135'
-alias mntpi='sudo mount.cifs //192.168.1.85/lingdata /mnt/pi -o uid=0,nofail,credentials=/home/ling/.smb,iocharset=utf8,noperm'
+alias mntpi='sudo mount.cifs //192.168.1.85/ling /mnt/pi -o uid=0,nofail,credentials=/home/ling/.smb,iocharset=utf8,noperm'
+alias winview='looking-glass-client -p 5901 -k -a'
 alias ....='cd ../..'
 alias :e=vim
 alias :qa=exit
