@@ -8,6 +8,7 @@ alias aws2='ssh ling@18.224.40.135'
 alias mntpi='sudo mount.cifs //192.168.1.85/ling /mnt/pi -o uid=0,nofail,credentials=/home/ling/.smb,iocharset=utf8,noperm'
 alias winview='~/winview'
 alias winstart='virsh -c qemu:///system start win10'
+alias winstop='virsh -c qemu:///system stop win10'
 alias ....='cd ../..'
 alias :e=vim
 alias :qa=exit

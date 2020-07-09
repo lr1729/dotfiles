@@ -91,10 +91,7 @@ nnoremap <Down> :echoe "Use k"<CR>
 colorscheme apprentice " Cool color scheme
 let g:airline_powerline_fonts = 1 " Adds cool arrows to airline
 set termguicolors " True 24 bit colors for nvim
-augroup highlight_yank " Flash yanked text
-    autocmd!
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("Substitute", 200)
-augroup END 
+au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Substitute", timeout=200, on_visual=false} " Highlight yanked text
 
 " =========
 " = Other =
