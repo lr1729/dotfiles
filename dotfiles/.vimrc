@@ -91,7 +91,7 @@ nnoremap <Down> :echoe "Use k"<CR>
 colorscheme apprentice " Cool color scheme
 let g:airline_powerline_fonts = 1 " Adds cool arrows to airline
 set termguicolors " True 24 bit colors for nvim
-au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Substitute", timeout=200, on_visual=false} " Highlight yanked text
+au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Substitute", timeout=150}
 
 " =========
 " = Other =
@@ -167,7 +167,8 @@ call vundle#end()
 " = Post Vundle Configuration =
 " =============================
 
-" Transparent background
-hi Normal guibg=NONE ctermbg=NONE 
 syntax on " Turns on syntax highlighting
 filetype indent plugin on " Not sure why this is needed
+" Enable transparent backgrounds
+hi! Normal ctermbg=NONE guibg=NONE
+
