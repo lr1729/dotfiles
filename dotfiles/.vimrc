@@ -6,9 +6,9 @@ set encoding=utf-8
 
 set autoindent " Automatically indents lines
 set list listchars=tab:»·,trail:·,nbsp:· " Show extra whitespace and differentiate tabs from spaces
-set noexpandtab " Don't convert tabs to spaces
-set shiftwidth=2 " A tab is equal to 2 spaces
+set noet " Don't convert tabs to spaces
 set tabstop=2 " Set tabs to 2 spaces
+set shiftwidth=2 " Set tabs to 2 spaces
 
 " =============
 " = Searching =
@@ -171,4 +171,3 @@ syntax on " Turns on syntax highlighting
 filetype indent plugin on " Not sure why this is needed
 " Enable transparent backgrounds
 hi! Normal ctermbg=NONE guibg=NONE
-
