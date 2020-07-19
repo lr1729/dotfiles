@@ -4,10 +4,9 @@
 
 # Create a hash table for globally stashing variables without polluting main
 # scope with a bunch of identifiers.
-typeset -A __WINCENT
-
-__WINCENT[ITALIC_ON]=$'\e[3m'
-__WINCENT[ITALIC_OFF]=$'\e[23m'
+typeset -A __ital
+__ital[ITALIC_ON]=$'\e[3m'
+__ital[ITALIC_OFF]=$'\e[23m'
 
 #
 # Completion
@@ -38,7 +37,7 @@ zstyle ':completion:*:complete:(cd|pushd):*' tag-order 'local-directories named-
 
 # Categorize completion suggestions with headings:
 zstyle ':completion:*' group-name ''
-zstyle ':completion:*:descriptions' format %F{default}%B%{$__WINCENT[ITALIC_ON]%}--- %d ---%{$__WINCENT[ITALIC_OFF]%}%b%f
+zstyle ':completion:*:descriptions' format %F{default}%B%{$__ital[ITALIC_ON]%}--- %d ---%{$__ital[ITALIC_OFF]%}%b%f
 
 # Enable keyboard navigation of completions in menu
 # (not just tab/shift-tab but cursor keys as well):
@@ -327,7 +326,7 @@ function -report-start-time() {
       SECS="$((~~$SECS))s"
     fi
     ELAPSED="${ELAPSED}${SECS}"
-    export RPROMPT="%F{cyan}%{$__WINCENT[ITALIC_ON]%}${ELAPSED}%{$__WINCENT[ITALIC_OFF]%}%f $RPROMPT_BASE"
+    export RPROMPT="%F{cyan}%{$__ital[ITALIC_ON]%}${ELAPSED}%{$__ital[ITALIC_OFF]%}%f $RPROMPT_BASE"
     unset ZSH_START_TIME
   else
     export RPROMPT="$RPROMPT_BASE"
@@ -347,17 +346,17 @@ add-zsh-hook chpwd -auto-ls-after-cd
 
 # Remember each command we run.
 function -record-command() {
-  __WINCENT[LAST_COMMAND]="$2"
+  __ital[LAST_COMMAND]="$2"
 }
 add-zsh-hook preexec -record-command
 
 # Update vcs_info (slow) after any command that probably changed it.
 function -maybe-show-vcs-info() {
-  local LAST="$__WINCENT[LAST_COMMAND]"
+  local LAST="$__ital[LAST_COMMAND]"
 
   # In case user just hit enter, overwrite LAST_COMMAND, because preexec
   # won't run and it will otherwise linger.
-  __WINCENT[LAST_COMMAND]="<unset>"
+  __ital[LAST_COMMAND]="<unset>"
 
   # Check first word; via:
   # http://tim.vanwerkhoven.org/post/2012/10/28/ZSH/Bash-string-manipulation
@@ -369,6 +368,7 @@ function -maybe-show-vcs-info() {
       ;;
   esac
 }
+
 add-zsh-hook precmd -maybe-show-vcs-info
 
 # adds `cdr` command for navigating to recent directories
@@ -384,6 +384,5 @@ zstyle ':chpwd:*' recent-dirs-default true
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
