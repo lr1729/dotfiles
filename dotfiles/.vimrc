@@ -6,9 +6,9 @@ set encoding=utf-8
 
 set autoindent " Automatically indents lines
 set list listchars=tab:»·,trail:·,nbsp:· " Show extra whitespace and differentiate tabs from spaces
-set noet " Don't convert tabs to spaces
 set tabstop=2 " Set tabs to 2 spaces
 set shiftwidth=2 " Set tabs to 2 spaces
+set expandtab " Expand tabs to spaces
 
 " =============
 " = Searching =
