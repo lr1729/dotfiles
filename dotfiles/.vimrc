@@ -60,8 +60,10 @@ tnoremap <Esc> <C-\><C-n>
 " capital is for on select middle button clipboard
 noremap <Leader>y "+y
 noremap <Leader>p "+p
+noremap <Leader>d "+d
 noremap <Leader>Y "*y
 noremap <Leader>P "*p
+noremap <Leader>D "*d
 " space inserts a single character
 nnoremap <Space> i_<Esc>r
 " Control o opens nerdtree
@@ -96,7 +98,7 @@ set splitbelow " Opens new buffers below
 set splitright " Opens new buffers to the right
 set nojoinspaces " Something about joining lines and spaces
 set whichwrap+=<,>,h,l,[,] " Wrap lines with arrow keys and hl
-set scrolloff=4 " Keeps 4 lines on edges visible when scrolling
+set scrolloff=5 " Keeps 4 lines on edges visible when scrolling
 set title " Sets title of terminal
 set hidden " When opening a new buffer it hides old one
 autocmd TermOpen * startinsert " Automatically enter insert mode when entering a terminal window in nvim
@@ -107,16 +109,13 @@ let g:hardtime_ignore_buffer_patterns = [ "CustomPatt[ae]rn", "NERD.*" ] " Don't
 let g:hardtime_ignore_quickfix = 1 " Ignore quickfix window
 let g:hardtime_allow_different_key = 1 " Allow consecutive different keys
 let g:hardtime_maxcount = 2 " Allows 2 consecutive key presses
+" When editing a file, always jump to the last known cursor position.
 augroup vimrcEx
   autocmd!
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it for commit messages, when the position is invalid, or when
-  " inside an event handler (happens when dropping a file on gvim).
   autocmd BufReadPost *
     \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
-
   " Set syntax highlighting for specific file types
   autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
@@ -125,7 +124,6 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile tmux.conf.local set filetype=tmux
   autocmd BufRead,BufNewFile vimrc.local set filetype=vim
 augroup END
-set nocompatible " Not sure about this
 filetype off " Turns off file detection before plugins load
 
 " Loads Vundle
@@ -147,7 +145,6 @@ Plugin 'flazz/vim-colorschemes' " Provides themes for vim
 Plugin 'dense-analysis/ale' " Provides linting
 Plugin 'junegunn/fzf.vim' " Providez fuzzy file finding
 Plugin 'takac/vim-hardtime' " Disables hjkl overuse
-Plugin 'sheerun/vim-polyglot' " Language packs
 Plugin 'OmniSharp/omnisharp-vim' " C# omnicompletion
 Plugin 'valloric/youcompleteme' " Autocompletion and completion manager
 
