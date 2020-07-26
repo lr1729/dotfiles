@@ -25,15 +25,11 @@ set smartcase " Unless it starts with a capital
 " = Syntax =
 " ==========
 
+syntax on " Turns on syntax highlighting
 let g:OmniSharp_server_use_mono = 1 " Use system mono instead
 let g:OmniSharp_highlighting = 2 " Use OmniSharp highlighting for c# files
 let g:OmniSharp_server_stdio = 1 " Use the async Roslyn server
-let g:SuperTabDefaultCompletionType = '<c-x><c-o>' "Use basic autocomplete as supertab default
-let g:SuperTabClosePreviewOnPopupClose = 1 " Not sure
-set omnifunc=ale#completion#OmniFunc
 let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
-set wildmode=list:longest,list:full " Completion type
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif " Close preview window when completion is done
 let g:ale_completion_tsserver_autoimport = 1 " Handle imports
 
 " ===========
@@ -73,9 +69,6 @@ map <C-o> :NERDTreeToggle<CR>
 " Move between linting errors
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
-" Uses tab and enter to select completion
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<C-x><C-o>"
 " Map Ctrl + p to open fuzzy find (FZF)
 nnoremap <c-p> :Files<cr>
 " Lose the arrow keys
@@ -91,7 +84,7 @@ nnoremap <Down> :echoe "Use k"<CR>
 colorscheme apprentice " Cool color scheme
 let g:airline_powerline_fonts = 1 " Adds cool arrows to airline
 set termguicolors " True 24 bit colors for nvim
-au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Substitute", timeout=150}
+au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Substitute", timeout=150} " Highlight yanks
 
 " =========
 " = Other =
@@ -99,7 +92,6 @@ au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Substitute", timeo
 
 set mouse=a " Can use mouse for yanking
 set backspace=2   " Backspace deletes like most programs in insert mode
-" Open new split panes to right and bottom, which feels more natural
 set splitbelow " Opens new buffers below
 set splitright " Opens new buffers to the right
 set nojoinspaces " Something about joining lines and spaces
@@ -114,6 +106,7 @@ let g:hardtime_default_on = 1 " Run hardtime in all buffers by default
 let g:hardtime_ignore_buffer_patterns = [ "CustomPatt[ae]rn", "NERD.*" ] " Don't run in NERDtree
 let g:hardtime_ignore_quickfix = 1 " Ignore quickfix window
 let g:hardtime_allow_different_key = 1 " Allow consecutive different keys
+let g:hardtime_maxcount = 2 " Allows 2 consecutive key presses
 augroup vimrcEx
   autocmd!
   " When editing a file, always jump to the last known cursor position.
@@ -133,7 +126,9 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile vimrc.local set filetype=vim
 augroup END
 set nocompatible " Not sure about this
-filetype off " Omnisharp breaks without this for some reason
+filetype off " Turns off file detection before plugins load
+
+" Loads Vundle
 source ~/.vim/bundle/bclose.vim
 "Add Vundle to runtime path
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -143,19 +138,18 @@ Plugin 'gmarik/Vundle.vim'
 " ========================
 " = Add new plugins here =
 " ========================
-"
-Plugin 'scrooloose/nerdtree'
-Plugin 'inside/vim-search-pulse'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'flazz/vim-colorschemes' 
-Plugin 'dense-analysis/ale'
-Plugin 'junegunn/fzf.vim'
-Plugin 'takac/vim-hardtime'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'OmniSharp/omnisharp-vim'
-Plugin 'ervandew/supertab'
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plugin 'scrooloose/nerdtree' " Provides IDE-like file hierarchy browser
+Plugin 'inside/vim-search-pulse' " Pulses search results
+Plugin 'vim-airline/vim-airline' " Provides Airline bar
+Plugin 'vim-airline/vim-airline-themes' " Provides Airline themes
+Plugin 'flazz/vim-colorschemes' " Provides themes for vim
+Plugin 'dense-analysis/ale' " Provides linting
+Plugin 'junegunn/fzf.vim' " Providez fuzzy file finding
+Plugin 'takac/vim-hardtime' " Disables hjkl overuse
+Plugin 'sheerun/vim-polyglot' " Language packs
+Plugin 'OmniSharp/omnisharp-vim' " C# omnicompletion
+Plugin 'valloric/youcompleteme' " Autocompletion and completion manager
 
 " ======================
 " = End of plugin list =
@@ -167,7 +161,6 @@ call vundle#end()
 " = Post Vundle Configuration =
 " =============================
 
-syntax on " Turns on syntax highlighting
-filetype indent plugin on " Not sure why this is needed
+filetype indent plugin on " Turns it on again for omnisharp
 " Enable transparent backgrounds
 hi! Normal ctermbg=NONE guibg=NONE
