@@ -15,9 +15,9 @@ set expandtab " Expand tabs to spaces
 " =============
 
 set number relativenumber " Relative line numbers are nice
-set numberwidth=5 " Increases line number margins
+set numberwidth=4 " Increases line number margins
 set hlsearch " Highlight searches
-set incsearch " Incremental Searchlet g:OmniSharp_loglevel = 'debug'
+set incsearch " Incremental Search
 set ignorecase " Ignores case when searching 
 set smartcase " Unless it starts with a capital
 
@@ -26,9 +26,8 @@ set smartcase " Unless it starts with a capital
 " ==========
 
 syntax on " Turns on syntax highlighting
-let g:OmniSharp_server_use_mono = 1 " Use system mono instead
-let g:OmniSharp_highlighting = 2 " Use OmniSharp highlighting for c# files
-let g:OmniSharp_server_stdio = 1 " Use the async Roslyn server
+filetype on " Automatic file type detection
+set omnifunc=ale#completion#OmniFunc " Let ALE hangle omnicompletion
 let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
 let g:ale_completion_tsserver_autoimport = 1 " Handle imports
 
@@ -56,7 +55,7 @@ nnoremap <A-l> <C-w>l
 inoremap jj <ESC>
 " Esc also eximts terminal mode
 tnoremap <Esc> <C-\><C-n>
-" can use \y and \p to yank and paste from clipboard instead of vim buffer,
+" can use \y and \p and \d to yank and paste from clipboard instead of vim buffer,
 " capital is for on select middle button clipboard
 noremap <Leader>y "+y
 noremap <Leader>p "+p
@@ -124,7 +123,6 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile tmux.conf.local set filetype=tmux
   autocmd BufRead,BufNewFile vimrc.local set filetype=vim
 augroup END
-filetype off " Turns off file detection before plugins load
 
 " Loads Vundle
 source ~/.vim/bundle/bclose.vim
@@ -145,7 +143,6 @@ Plugin 'flazz/vim-colorschemes' " Provides themes for vim
 Plugin 'dense-analysis/ale' " Provides linting
 Plugin 'junegunn/fzf.vim' " Providez fuzzy file finding
 Plugin 'takac/vim-hardtime' " Disables hjkl overuse
-Plugin 'OmniSharp/omnisharp-vim' " C# omnicompletion
 Plugin 'valloric/youcompleteme' " Autocompletion and completion manager
 
 " ======================
@@ -158,6 +155,5 @@ call vundle#end()
 " = Post Vundle Configuration =
 " =============================
 
-filetype indent plugin on " Turns it on again for omnisharp
 " Enable transparent backgrounds
 hi! Normal ctermbg=NONE guibg=NONE
