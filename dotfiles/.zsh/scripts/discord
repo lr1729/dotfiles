@@ -1,4 +1,5 @@
 #!/bin/bash
+sleep 15
 /opt/discord/Discord &
 sleep 30
 echo "starting fetchcord"
