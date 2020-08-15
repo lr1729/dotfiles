@@ -145,6 +145,7 @@ Plugin 'dense-analysis/ale' " Provides linting
 Plugin 'junegunn/fzf.vim' " Providez fuzzy file finding
 Plugin 'takac/vim-hardtime' " Disables hjkl overuse
 Plugin 'valloric/youcompleteme' " Autocompletion and completion manager
+Plugin 'hugolgst/vimsence' " Rich precense plugin for Discord
 
 " ======================
 " = End of plugin list =
