@@ -30,6 +30,7 @@ filetype on " Automatic file type detection
 set omnifunc=ale#completion#OmniFunc " Let ALE hangle omnicompletion
 let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
 let g:ale_completion_tsserver_autoimport = 1 " Handle imports
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " ===========
 " = KEYMAPS =
@@ -144,8 +145,9 @@ Plugin 'flazz/vim-colorschemes' " Provides themes for vim
 Plugin 'dense-analysis/ale' " Provides linting
 Plugin 'junegunn/fzf.vim' " Providez fuzzy file finding
 Plugin 'takac/vim-hardtime' " Disables hjkl overuse
-Plugin 'valloric/youcompleteme' " Autocompletion and completion manager
 Plugin 'hugolgst/vimsence' " Rich precense plugin for Discord
+Plugin 'neoclide/coc.nvim', {'branch': 'release'} " Intelligent completion
+Plugin 'ervandew/supertab' " Intelligent tab autocomplete
 
 " ======================
 " = End of plugin list =
