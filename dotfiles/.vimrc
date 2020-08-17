@@ -31,6 +31,7 @@ set omnifunc=ale#completion#OmniFunc " Let ALE hangle omnicompletion
 let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
 let g:ale_completion_tsserver_autoimport = 1 " Handle imports
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:tex_flavor = 'latex' " use latex by default
 
 " ===========
 " = KEYMAPS =
@@ -148,6 +149,7 @@ Plugin 'takac/vim-hardtime' " Disables hjkl overuse
 Plugin 'hugolgst/vimsence' " Rich precense plugin for Discord
 Plugin 'neoclide/coc.nvim', {'branch': 'release'} " Intelligent completion
 Plugin 'ervandew/supertab' " Intelligent tab autocomplete
+Plugin 'lervag/vimtex' " LaTeX Plugin
 
 " ======================
 " = End of plugin list =
