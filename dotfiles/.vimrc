@@ -39,18 +39,18 @@ let g:ale_completion_tsserver_autoimport = 1 " Handle imports
 noremap j k
 noremap k j
 " Easier keybinds to move terminals (j and k switched)
-tnoremap <A-h> <C-\><C-N><C-w>h
-tnoremap <A-k> <C-\><C-N><C-w>j
-tnoremap <A-j> <C-\><C-N><C-w>k
-tnoremap <A-l> <C-\><C-N><C-w>l
-inoremap <A-h> <C-\><C-N><C-w>h
-inoremap <A-k> <C-\><C-N><C-w>j
-inoremap <A-j> <C-\><C-N><C-w>k
-inoremap <A-l> <C-\><C-N><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-k> <C-w>j
-nnoremap <A-j> <C-w>k
-nnoremap <A-l> <C-w>l
+tnoremap <C-h> <C-\><C-N><C-w>h
+tnoremap <C-k> <C-\><C-N><C-w>j
+tnoremap <C-j> <C-\><C-N><C-w>k
+tnoremap <C-l> <C-\><C-N><C-w>l
+inoremap <C-h> <C-\><C-N><C-w>h
+inoremap <C-k> <C-\><C-N><C-w>j
+inoremap <C-j> <C-\><C-N><C-w>k
+inoremap <C-l> <C-\><C-N><C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-k> <C-w>j
+nnoremap <C-j> <C-w>k
+nnoremap <C-l> <C-w>l
 " use jj instead of esc
 inoremap jj <ESC>
 " Esc also eximts terminal mode
