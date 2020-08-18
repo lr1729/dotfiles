@@ -31,7 +31,14 @@ set omnifunc=ale#completion#OmniFunc " Let ALE hangle omnicompletion
 let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
 let g:ale_completion_tsserver_autoimport = 1 " Handle imports
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-let g:tex_flavor = 'latex' " use latex by default
+let g:tex_flavor='latex' " Set default filetype to LaTeX
+let g:vimtex_view_method='zathura' " Use zathura as the viewer
+let g:vimtex_quickfix_mode=0 " Allows quickfixes
+set conceallevel=1 " Hides ugly syntax
+let g:tex_conceal='abdmg' " idk
+let g:UltiSnipsExpandTrigger = '<tab>' " Tab triggers Ultisnips
+let g:UltiSnipsJumpForwardTrigger = '<tab>' " Tab cycles snips
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>' "Shift-Tab cycles snips in reverse
 
 " ===========
 " = KEYMAPS =
@@ -90,11 +97,12 @@ set termguicolors " True 24 bit colors for nvim
 " Flash yanked text
 au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Substitute", timeout=150, on_visual=false}
 
+
 " =========
 " = Other =
 " =========
 
-set mouse=a " Can use mouse for yanking
+" set mouse=a " Can use mouse for yanking
 set backspace=2   " Backspace deletes like most programs in insert mode
 set splitbelow " Opens new buffers below
 set splitright " Opens new buffers to the right
@@ -110,7 +118,7 @@ let g:hardtime_default_on = 1 " Run hardtime in all buffers by default
 let g:hardtime_ignore_buffer_patterns = [ "CustomPatt[ae]rn", "NERD.*" ] " Don't run in NERDtree
 let g:hardtime_ignore_quickfix = 1 " Ignore quickfix window
 let g:hardtime_allow_different_key = 1 " Allow consecutive different keys
-let g:hardtime_maxcount = 2 " Allows 2 consecutive key presses
+let g:hardtime_maxcount = 3 " Allows 3 consecutive key presses
 " When editing a file, always jump to the last known cursor position.
 augroup vimrcEx
   autocmd!
@@ -150,6 +158,7 @@ Plugin 'hugolgst/vimsence' " Rich precense plugin for Discord
 Plugin 'neoclide/coc.nvim', {'branch': 'release'} " Intelligent completion
 Plugin 'ervandew/supertab' " Intelligent tab autocomplete
 Plugin 'lervag/vimtex' " LaTeX Plugin
+Plugin 'sirver/ultisnips' " LaTeX Snippets plugin
 
 " ======================
 " = End of plugin list =
