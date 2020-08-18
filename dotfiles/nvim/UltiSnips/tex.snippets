@@ -28,20 +28,10 @@ snippet template "Basic template" b
 \usepackage{float}
 \restylefloat{table}
 \usepackage{verbatim}
-% Set left margin - The default is 1 inch, so the following 
-% command sets a 1.25-inch left margin.
 \setlength{\oddsidemargin}{0.25in}
-
-% Set width of the text - What is left will be the right margin.
-% In this case, right margin is 8.5in - 1.25in - 6in = 1.25in.
 \setlength{\textwidth}{6in}
-
-% Set top margin - The default is 1 inch, so the following 
-% command sets a 0.75-inch top margin.
 \setlength{\topmargin}{-0.25in}
 \title{$1}
-% Set height of the text - What is left will be the bottom margin.
-% In this case, bottom margin is 11in - 0.75in - 9.5in = 0.75in
 \setlength{\textheight}{8in}
 \begin{document}
 \begin{flushright}
@@ -52,6 +42,14 @@ snippet template "Basic template" b
 
 $0
 \end{document}
+endsnippet
+
+snippet '([a-z]?[a-z])\)' "Problem sub lettering" brA
+$\mathbf{`!p snip.rv = match.group(1)`}\boldsymbol{\left.\right)}$ 
+endsnippet
+
+snippet '(\d?\d)\)' "Problem numbering" brA
+\noindent $\mathbf{`!p snip.rv = match.group(1)`}\boldsymbol{\left.\right)}$ 
 endsnippet
 
 snippet today "Date"
@@ -172,14 +170,6 @@ endsnippet
 context "math()"
 snippet floor "floor" iA
 \left\lfloor $1 \right\rfloor$0
-endsnippet
-
-snippet pmat "pmat" iA
-\begin{pmatrix} $1 \end{pmatrix} $0
-endsnippet
-
-snippet bmat "bmat" iA
-\begin{bmatrix} $1 \end{bmatrix} $0
 endsnippet
 
 context "math()"
@@ -346,7 +336,7 @@ endsnippet
 priority 300
 context "math()"
 snippet dint "integral" wA
-\int_{${1:-\infty}}^{${2:\infty}} ${3:${VISUAL}} $0
+\int_{${1:}}^{${2:}} ${3:${VISUAL}} $0
 endsnippet
 
 priority 100
