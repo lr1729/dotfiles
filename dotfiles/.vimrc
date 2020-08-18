@@ -86,6 +86,7 @@ nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe> "Use j"<CR>
 nnoremap <Down> :echoe "Use k"<CR>
+noremap <Leader>s :update<CR> " \s for quicksave
 
 " ==============
 " = Appearance =
