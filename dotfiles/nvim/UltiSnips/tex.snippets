@@ -46,11 +46,15 @@ snippet template "Basic template" b
 \begin{document}
 \begin{flushright}
 	Lingfeng Ren\\
-	1/6/20
+	`date +%F`
 \end{flushright}
 
 $0
 \end{document}
+endsnippet
+
+snippet today "Date"
+`date +%F`
 endsnippet
 
 snippet beg "begin{} / end{}" bA
