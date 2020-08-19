@@ -31,20 +31,33 @@ snippet template "Basic template" b
 \setlength{\oddsidemargin}{0.25in}
 \setlength{\textwidth}{6in}
 \setlength{\topmargin}{-0.25in}
-\title{$1}
 \setlength{\textheight}{8in}
 \begin{document}
 \begin{flushright}
 	Lingfeng Ren\\\\
-	`date +%F` \\
-	Block $2
+	`date +%F` \\\\
+	Block $1
 \end{flushright}
+
+\begin{center}
+\large $2
+\end{center}
 
 $0
 \end{document}
 endsnippet
 
+snippet box "Box"
+$\boxed{$1}$
+endsnippet
+
+snippet '([a-zA-Z])' "Single letters" r
+$`!p snip.rv = match.group(1)`$
+endsnippet
+
 snippet '([a-z]?[a-z])\)' "Problem sub lettering" brA
+
+\medskip
 $\mathbf{`!p snip.rv = match.group(1)`}\boldsymbol{\left.\right)}$ 
 endsnippet
 
