@@ -51,8 +51,8 @@ snippet box "Box"
 $\boxed{$1}$
 endsnippet
 
-snippet '([a-zA-Z])' "Single letters" r
-$`!p snip.rv = match.group(1)`$
+snippet '\s([a-zA-Z])' "Single letters" rw
+ $`!p snip.rv = match.group(1)`$
 endsnippet
 
 snippet '([a-z]?[a-z])\)' "Problem sub lettering" brA
