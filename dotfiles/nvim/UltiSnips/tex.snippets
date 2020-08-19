@@ -58,11 +58,11 @@ endsnippet
 snippet '([a-z]?[a-z])\)' "Problem sub lettering" brA
 
 \medskip
-$\mathbf{`!p snip.rv = match.group(1)`}\boldsymbol{\left.\right)}$ 
+\indent\textbf{`!p snip.rv = match.group(1)`)}
 endsnippet
 
-snippet '(\d?\d)\)' "Problem numbering" brA
-\noindent $\mathbf{`!p snip.rv = match.group(1)`}\boldsymbol{\left.\right)}$ 
+snippet '(\d?\d)\.' "Problem numbering" brA
+\noindent\textbf{`!p snip.rv = match.group(1)`.}
 endsnippet
 
 snippet today "Date"
