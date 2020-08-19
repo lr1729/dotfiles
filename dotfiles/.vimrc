@@ -39,6 +39,9 @@ let g:tex_conceal='abdmg' " idk
 let g:UltiSnipsExpandTrigger = '<tab>' " Tab triggers Ultisnips
 let g:UltiSnipsJumpForwardTrigger = '<tab>' " Tab cycles snips
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>' "Shift-Tab cycles snips in reverse
+augroup vimtex_config
+  autocmd User VimtexEventInitPost VimtexCompile
+augroup END
 
 " ===========
 " = KEYMAPS =
