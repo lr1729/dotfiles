@@ -46,6 +46,7 @@ snippet box "Box"
 $\boxed{$1}$
 endsnippet
 
+context "not math()"
 snippet '\s([a-zA-Z])' "Single letters" rw
  $`!p snip.rv = match.group(1)`$
 endsnippet
