@@ -1,6 +1,0 @@
-#!/bin/bash
-sleep 15
-/opt/discord/Discord --start-minimized &
-sleep 15
-echo "starting fetchcord"
-fetchcord --nohardware --nohost --terminal konsole --termfont "Hack 10" --time 120
