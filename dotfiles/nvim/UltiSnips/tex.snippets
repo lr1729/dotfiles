@@ -27,6 +27,20 @@ snippet template "Basic template" b
 \restylefloat{table}
 \usepackage{verbatim}
 \usepackage[margin=1in]{geometry}
+
+% figure support
+\usepackage{import}
+\usepackage{xifthen}
+\pdfminorversion=7
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+	\def\svgwidth{\columnwidth}
+	\import{./figures/}{#1.pdf_tex}
+}
+
+\pdfsuppresswarningpagegroup=1
+
 \begin{document}
 \begin{flushright}
 	Lingfeng Ren\\\\
@@ -42,14 +56,37 @@ $0
 \end{document}
 endsnippet
 
+snippet splitali "Side by side align" bA
+\begin{tabular}{p{8cm}p{8cm}}
+{\begin{align*}
+$1
+\end{align*}}
+&
+{\begin{align*}
+$2
+\end{align*} }
+\end{tabular}
+$0
+endsnippet
+
 context "not math()"
 snippet box "Box"
 $\boxed{$1}$
 endsnippet
 
 context "math()"
-snippet box "Box"
+snippet box "Box" iA
 \boxed{$1}
+endsnippet
+
+context "math()"
+snippet space "Inline whitespace" i
+\hspace{${1:1}cm}
+endsnippet
+
+context "not math()"
+snippet space "Inline whitespace" i
+$\hspace{${1:1}cm}$
 endsnippet
 
 context "not math()"
@@ -428,19 +465,19 @@ snippet nnn "bigcap" iA
 endsnippet
 
 snippet OO "emptyset" iA
-\O
+\mathbb{O}
 endsnippet
 
 snippet RR "real" iA
-\R
+\mathbb{R}
 endsnippet
 
 snippet QQ "Q" iA
-\Q
+\mathbb{Q}
 endsnippet
 
 snippet ZZ "Z" iA
-\Z
+\mathbb{Z}
 endsnippet
 
 context "math()"
