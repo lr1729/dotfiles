@@ -94,7 +94,7 @@ inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" 
 nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 " Enable spellcheck
 setlocal spell
-set spelllang=nl,en_gb
+set spelllang=en
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " ==============
