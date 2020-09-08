@@ -78,7 +78,7 @@ noremap <Leader>D "*d
 " space inserts a single character
 nnoremap <Space> i_<Esc>r
 " Control o opens nerdtree
-map <C-o> :NERDTreeToggle<CR>
+map <C-m> :NERDTreeToggle<CR>
 " Move between linting errors
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
@@ -89,8 +89,8 @@ nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe> "Use j"<CR>
 nnoremap <Down> :echoe "Use k"<CR>
-noremap <Leader>s :update<CR> " \s for quicksave
-inoremap <C-s> <C-o>:update<CR>
+noremap <Leader>s :w<CR> " \s for quicksave
+inoremap <C-s> <C-o>:w<CR>
 inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 " Enable spellcheck
