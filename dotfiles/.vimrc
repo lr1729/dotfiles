@@ -90,6 +90,7 @@ nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe> "Use j"<CR>
 nnoremap <Down> :echoe "Use k"<CR>
 noremap <Leader>s :update<CR> " \s for quicksave
+inoremap <C-s> <C-o>:update<CR>
 inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 " Enable spellcheck
