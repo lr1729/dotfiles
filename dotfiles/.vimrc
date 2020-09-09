@@ -78,7 +78,7 @@ noremap <Leader>D "*d
 " space inserts a single character
 nnoremap <Space> i_<Esc>r
 " Control o opens nerdtree
-map <C-m> :NERDTreeToggle<CR>
+map <C-o> :NERDTreeToggle<CR>
 " Move between linting errors
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
