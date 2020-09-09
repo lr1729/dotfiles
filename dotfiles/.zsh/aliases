@@ -10,7 +10,7 @@ alias mntpi='sudo mount.cifs //192.168.1.87/ling /mnt/pi -o uid=0,nofail,credent
 alias winview='nohup ~/.zsh/scripts/winview >/dev/null 2>&1 &'
 alias lwine='/home/ling/.local/share/lutris/runners/wine/lutris-5.7-6-x86_64/bin/wine'
 alias pisync='~/.zsh/scripts/pisync'
-alias andstart='nohup emulator -avd Pixel_2_API_30 >/dev/null 2>&1 &'
+alias andstart='setsid emulator -avd Pixel_2_API_30'
 alias winstart='virsh -c qemu:///system start win10'
 alias winstop='virsh -c qemu:///system shutdown win10'
 alias ....='cd ../..'
