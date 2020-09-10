@@ -94,9 +94,12 @@ inoremap <C-s> <C-o>:w<CR>
 inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 " Enable spellcheck
-setlocal spell
+autocmd FileType latex,tex,md,markdown setlocal spell
 set spelllang=en
+" Autocorrect
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+" One key compile and run
+autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
 " ==============
 " = Appearance =
@@ -145,6 +148,8 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile tmux.conf.local set filetype=tmux
   autocmd BufRead,BufNewFile vimrc.local set filetype=vim
 augroup END
+set autoread | au CursorHold * checktime | call feedkeys("lh") " Automatically update all files
+set updatetime=750 " Sets the update time to 750 milliseconds
 
 " Loads Vundle
 source ~/.vim/bundle/bclose.vim
