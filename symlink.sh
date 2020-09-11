@@ -7,8 +7,8 @@ else
 	destPath="$HOME"
 fi
 
-# Exclude .config folder to be symliked seperately
-exclude=( ".config" )
+# Exclude .config folder to be symliked seperately and other files
+exclude=( ".config" ".git" ".gitignore" "symlink.sh")
 
 # Math hidden files with globbing
 shopt -s dotglob 
