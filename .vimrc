@@ -39,6 +39,7 @@ let g:tex_conceal='abdmg' " idk
 let g:UltiSnipsExpandTrigger = '<tab>' " Tab triggers Ultisnips
 let g:UltiSnipsJumpForwardTrigger = '<tab>' " Tab cycles snips
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>' "Shift-Tab cycles snips in reverse
+" Start a continuous compilation on file open
 augroup vimtex_config
   autocmd User VimtexEventInitPost VimtexCompile
 augroup END
@@ -98,7 +99,7 @@ autocmd FileType latex,tex,md,markdown setlocal spell
 set spelllang=en
 " Autocorrect
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
-" One key compile and run
+" One key compile and run for c++
 autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 
 " ==============
@@ -128,11 +129,6 @@ set hidden " When opening a new buffer it hides old one
 autocmd TermOpen * startinsert " Automatically enter insert mode when entering a terminal window in nvim
 autocmd VimResized * wincmd = " Automatcally resizes buffers on main window resize
 autocmd BufEnter,BufEnter term://* startinsert " Same as above but it actually works
-let g:hardtime_default_on = 1 " Run hardtime in all buffers by default
-let g:hardtime_ignore_buffer_patterns = [ "CustomPatt[ae]rn", "NERD.*" ] " Don't run in NERDtree
-let g:hardtime_ignore_quickfix = 1 " Ignore quickfix window
-let g:hardtime_allow_different_key = 1 " Allow consecutive different keys
-let g:hardtime_maxcount = 3 " Allows 3 consecutive key presses
 " When editing a file, always jump to the last known cursor position.
 augroup vimrcEx
   autocmd!
@@ -148,8 +144,8 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile tmux.conf.local set filetype=tmux
   autocmd BufRead,BufNewFile vimrc.local set filetype=vim
 augroup END
-set autoread | au CursorHold * checktime | call feedkeys("lh") " Automatically update all files
-set updatetime=750 " Sets the update time to 750 milliseconds
+au CursorHold,CursorHoldI * checktime " Automatically update a file when a change is detected even if it's unfocused
+set updatetime=1000 " Sets the update time to 1 second
 
 " Loads Vundle
 source ~/.vim/bundle/bclose.vim
@@ -169,12 +165,12 @@ Plugin 'vim-airline/vim-airline-themes' " Provides Airline themes
 Plugin 'flazz/vim-colorschemes' " Provides themes for vim
 Plugin 'dense-analysis/ale' " Provides linting
 Plugin 'junegunn/fzf.vim' " Providez fuzzy file finding
-Plugin 'takac/vim-hardtime' " Disables hjkl overuse
 Plugin 'hugolgst/vimsence' " Rich precense plugin for Discord
 Plugin 'neoclide/coc.nvim', {'branch': 'release'} " Intelligent completion
 Plugin 'ervandew/supertab' " Intelligent tab autocomplete
-Plugin 'lervag/vimtex' " LaTeX Plugin
-Plugin 'sirver/ultisnips' " LaTeX Snippets plugin
+Plugin 'lervag/vimtex' " LaTeX utils
+Plugin 'sirver/ultisnips' " LaTeX snippets
+Plugin 'junegunn/vim-peekaboo' " Buffer preview
 
 " ======================
 " = End of plugin list =
