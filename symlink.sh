@@ -7,13 +7,37 @@ else
 	destPath="$HOME"
 fi
 
-echo "${destPath}"
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-ln -sn "${DIR}/dotfiles/.zsh" "${destPath}/.zsh"
-ln -sn "${DIR}/dotfiles/.zshrc" "${destPath}/.zshrc"
-ln -sn "${DIR}/dotfiles/.vimrc" "${destPath}/.vimrc"
-ln -sn "${DIR}/dotfiles/.xbindkeysrc" "${destPath}/.xbindkeysrc"
-ln -sn "${DIR}/dotfiles/.vim" "${destPath}/.vim"
-ln -sn "${DIR}/dotfiles/nvim/" "${destPath}/.config/nvim"
-ln -sn "${DIR}/dotfiles/.vimrc" "${destPath}/.config/nvim/init.vim"
-ln -sn "${DIR}/dotfiles/zathura" "${destPath}/.config/zathura"
+# Exclude .config folder to be symliked seperately
+exclude=( ".config" )
+
+# Math hidden files with globbing
+shopt -s dotglob 
+
+# Where dotfiles are to be symliked to	
+echo "${destPath}" 
+
+# The directory the folder is in
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" 
+
+# Symlink files in home directory
+for file in *; do
+    for (( index = 0; index < ${#exclude[@]}; index++ )); do
+        if [[ ${file} != ${exclude[${index}]} ]]; then
+            ln -sfn ${DIR}/${file} ${destPath}/${file}
+        fi  
+    done
+done
+
+mkdir -p ${destPath}/.config # Create a .config folder if it doesn't already exist
+
+# Symlink files in .config directory
+for file in .config/*; do
+    for (( index = 0; index < ${#exclude[@]}; index++ )); do
+        if [[ ${file} != ${exclude[${index}]} ]]; then
+            ln -sfn ${DIR}/${file} ${destPath}/${file}
+        fi  
+    done
+done
+
+# Special case for nvim
+ln -sfn "${DIR}/.vimrc" "${destPath}/.config/nvim/init.vim"
