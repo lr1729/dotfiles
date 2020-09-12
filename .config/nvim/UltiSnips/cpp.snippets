@@ -31,7 +31,6 @@ int main() {
 endsnippet
 
 snippet 'for([a-zA-Z])' "Simple for loop" r
-
 for(int `!p snip.rv = match.group(1)` = 0; `!p snip.rv = match.group(1)` < $1; `!p snip.rv = match.group(1)`++){
   $0
 }
