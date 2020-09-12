@@ -144,8 +144,16 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile tmux.conf.local set filetype=tmux
   autocmd BufRead,BufNewFile vimrc.local set filetype=vim
 augroup END
-au CursorHold,CursorHoldI * checktime " Automatically update a file when a change is detected even if it's unfocused
-set updatetime=1000 " Sets the update time to 1 second
+
+" Check for file updates every second
+if ! exists("g:CheckUpdateStarted")
+let g:CheckUpdateStarted=1
+  call timer_start(1,'CheckUpdate')
+endif
+function! CheckUpdate(timer)
+silent! checktime
+  call timer_start(1000,'CheckUpdate')
+endfunction
 
 " Loads Vundle
 source ~/.vim/bundle/bclose.vim
