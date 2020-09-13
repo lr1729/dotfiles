@@ -1,33 +1,26 @@
 define sv
   set $vars = $arg0
+  dv
+end
+
+define ud
+  undisplay
+
 end
 
 define dv
-  p $displayVars($vars)
+python
+vars = str(gdb.convenience_variable("vars"))[1:-1].split()
+for word in vars:
+  gdb.execute("display " + word)
+end
+display
 end
 
 define pv
-  p $printVars($vars)
-end
-
 python
-class DVars (gdb.Function):
-  def __init__ (self):
-    super (DVars, self).__init__("displayVars")
-  def invoke (self, string):
-    vars = str(string)[1:-1].split()
-    for word in vars:
-      gdb.execute("display " + word)
-    return "Tracking variables " + str(string)[1:-1]
-DVars()
-class PVars (gdb.Function):
-  def __init__ (self):
-    super (PVars, self).__init__("printVars")
-  def invoke (self, string):
-    vars = str(string)[1:-1].split()
-    for word in vars:
-      gdb.execute("print " + word)
-    return ""
-PVars()
-
-
+vars = str(gdb.convenience_variable("vars"))[1:-1].split()
+for word in vars:
+  gdb.execute("print " + word)
+end
+end
