@@ -101,6 +101,9 @@ set spelllang=en
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 " One key compile and run for c++
 autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+" One key debug for c++
+packadd termdebug
+autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').'' <CR> :Termdebug %:r<CR><C-\><C-n><C-w>k<C-\><C-n>:q<CR><C-w>j
 
 " ==============
 " = Appearance =
@@ -126,8 +129,8 @@ set whichwrap+=<,>,h,l,[,] " Wrap lines with arrow keys and hl
 set scrolloff=5 " Keeps 4 lines on edges visible when scrolling
 set title " Sets title of terminal
 set hidden " When opening a new buffer it hides old one
-autocmd TermOpen * startinsert " Automatically enter insert mode when entering a terminal window in nvim
-autocmd VimResized * wincmd = " Automatcally resizes buffers on main window resize
+" autocmd TermOpen * startinsert " Automatically enter insert mode when entering a terminal window in nvim
+autocmd VimResized * wincmd = " Automatically resizes buffers on main window resize
 autocmd BufEnter,BufEnter term://* startinsert " Same as above but it actually works
 " When editing a file, always jump to the last known cursor position.
 augroup vimrcEx
