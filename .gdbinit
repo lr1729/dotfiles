@@ -11,8 +11,8 @@ end
 define dv
 python
 vars = str(gdb.convenience_variable("vars"))[1:-1].split()
-for word in vars:
-  gdb.execute("display " + word)
+for var in vars:
+  gdb.execute("display " + var)
 end
 display
 end
@@ -20,7 +20,7 @@ end
 define pv
 python
 vars = str(gdb.convenience_variable("vars"))[1:-1].split()
-for word in vars:
-  gdb.execute("print " + word)
+for var in vars:
+  gdb.execute("print " + var)
 end
 end
