@@ -230,35 +230,23 @@ endsnippet
 
 context "math()"
 snippet () "left( right)" iA
-\left( ${1:${VISUAL}} \right) $0
+\left(${1:${VISUAL}}\right)$0
 endsnippet
 
-snippet lr "left( right)" i
-\left( ${1:${VISUAL}} \right) $0
+snippet || "left| right|" iA
+\left|${1:${VISUAL}}\right|$0
 endsnippet
 
-snippet lr( "left( right)" i
-\left( ${1:${VISUAL}} \right) $0
+snippet {} "left\{ right\}" iA
+\left\\{${1:${VISUAL}}\right\\}$0
 endsnippet
 
-snippet lr| "left| right|" i
-\left| ${1:${VISUAL}} \right| $0
+snippet [] "left[ right]" iA
+\left[${1:${VISUAL}}\right]$0
 endsnippet
 
-snippet lr{ "left\{ right\}" i
-\left\\{ ${1:${VISUAL}} \right\\} $0
-endsnippet
-
-snippet lrb "left\{ right\}" i
-\left\\{ ${1:${VISUAL}} \right\\} $0
-endsnippet
-
-snippet lr[ "left[ right]" i
-\left[ ${1:${VISUAL}} \right] $0
-endsnippet
-
-snippet lra "leftangle rightangle" iA
-\left<${1:${VISUAL}} \right>$0
+snippet <> "leftangle rightangle" iA
+\left<${1:${VISUAL}}\right>$0
 endsnippet
 
 context "math()"
@@ -430,7 +418,7 @@ snippet set "set" wA
 \\{$1\\} $0
 endsnippet
 
-snippet || "mid" iA
+snippet | "mid" i
  \mid 
 endsnippet
 
