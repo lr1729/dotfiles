@@ -30,11 +30,15 @@ alias gp='git push'
 alias rm='trash'
 alias umirror='curl -s "https://www.archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - | sudo dd of=/etc/pacman.d/mirrorlist'
 function usaco(){
-  mkdir "$1"
-  cd "$1"
-  touch "$1".in
-  touch "$1".out
-  vim "$1".cpp
+  if [ -z "$1" ]; then
+    cd usaco
+  else
+    mkdir "$1"
+    cd "$1"
+    touch "$1".in
+    touch "$1".out
+    vim "$1".cpp
+  fi
 }
 function fcd() {
   cd $(baloosearch -l 1 type:folder "$1") 
