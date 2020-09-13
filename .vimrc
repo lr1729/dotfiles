@@ -103,7 +103,13 @@ inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
 " One key debug for c++
 packadd termdebug
-autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR> :Termdebug %:r<CR><C-\><C-n><C-w>k<C-\><C-n>:q<CR><C-w>j
+autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR> :Termdebug %:r<CR><C-\><C-n><C-w>k<C-\><C-n>:q<CR>
+" Debug shortcuts for c++
+autocmd FileType cpp noremap <F6> :Run<CR>
+autocmd FileType cpp noremap <F7> :Over<CR>
+autocmd FileType cpp noremap <F8> :Continue<CR>
+autocmd FileType cpp noremap <A-s> :Break<CR>
+autocmd FileType cpp noremap <A-c> :Clear<CR>
 
 " ==============
 " = Appearance =
