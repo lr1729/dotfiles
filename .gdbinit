@@ -1,18 +1,33 @@
 define sv
-  set $n = 1
   set $vars = $arg0
-  while $n < $argc
-    eval "set $var = $arg%d", $n
-    p $var
-    eval "set $vars = \"%s %s\"", $vars, $var
-    set $n = $n + 1
-  end
+end
+
+define dv
+  p $displayVars($vars)
 end
 
 define pv
-  set $n = 0
-  while $n < $vars
-    eval "print $arg%d", $n
-    set $n = $n + 1
-  end
+  p $printVars($vars)
 end
+
+python
+class DVars (gdb.Function):
+  def __init__ (self):
+    super (DVars, self).__init__("displayVars")
+  def invoke (self, string):
+    vars = str(string)[1:-1].split()
+    for word in vars:
+      gdb.execute("display " + word)
+    return "Tracking variables " + str(string)[1:-1]
+DVars()
+class PVars (gdb.Function):
+  def __init__ (self):
+    super (PVars, self).__init__("printVars")
+  def invoke (self, string):
+    vars = str(string)[1:-1].split()
+    for word in vars:
+      gdb.execute("print " + word)
+    return ""
+PVars()
+
+
