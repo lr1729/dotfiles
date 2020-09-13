@@ -86,10 +86,6 @@ nnoremap [r :ALEPreviousWrap<CR>
 " Map Ctrl + p to open fuzzy find (FZF)
 nnoremap <c-p> :Files<cr>
 " Lose the arrow keys
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe> "Use j"<CR>
-nnoremap <Down> :echoe "Use k"<CR>
 noremap <Leader>s :w<CR> " \s for quicksave
 inoremap <C-s> <C-o>:w<CR>
 inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
