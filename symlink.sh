@@ -15,18 +15,22 @@ exclude=(".config" ".git" ".gitignore" "symlink.sh")
 shopt -s dotglob
 
 # Shows where dotfiles are to be symliked to
-echo "${destPath}"
+echo Dotfiles installed to "${destPath}"
 
 # The directory the folder is in
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" 
 
 # Symlink files in home directory
 for file in *; do
-    for (( index = 0; index < ${#exclude[@]}; index++ )); do
-        if [[ ${file} != ${exclude[${index}]} ]]; then
-            ln -sfn ${DIR}/${file} ${destPath}/${file}
-        fi
-    done
+  excluded=false
+  for (( index = 0; index < ${#exclude[@]}; index++ )); do
+    if [[ ${file} = ${exclude[${index}]} ]]; then
+      excluded=true
+    fi
+  done
+  if [ ${excluded} = false ]; then
+    ln -sfn ${DIR}/${file} ${destPath}/${file}
+  fi
 done
 
 mkdir -p ${destPath}/.config # Create a .config folder if it doesn't already exist
@@ -36,11 +40,15 @@ exclude2=()
 
 # Symlink files in .config directory
 for file in .config/*; do
-    for (( index = 0; index < ${#exclude2[@]}; index++ )); do
-        if [[ ${file} != ${exclude2[${index}]} ]]; then
-            ln -sfn ${DIR}/${file} ${destPath}/${file}
-        fi
-    done
+  excluded=false
+  for (( index = 0; index < ${#exclude2[@]}; index++ )); do
+    if [[ ${file} = ${exclude2[${index}]} ]]; then
+      excluded=true
+    fi
+  done
+  if [ ${excluded} = false ]; then
+    ln -sfn ${DIR}/${file} ${destPath}/${file}
+  fi
 done
 
 # Special case for nvim
