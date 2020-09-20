@@ -35,21 +35,15 @@ done
 
 mkdir -p ${destPath}/.config # Create a .config folder if it doesn't already exist
 
-# Files to be excluded from .config
-exclude2=()
-
 # Symlink files in .config directory
 for file in .config/*; do
-  excluded=false
-  for (( index = 0; index < ${#exclude2[@]}; index++ )); do
-    if [[ ${file} = ${exclude2[${index}]} ]]; then
-      excluded=true
-    fi
-  done
-  if [ ${excluded} = false ]; then
-    ln -sfn ${DIR}/${file} ${destPath}/${file}
-  fi
+  ln -sfn ${DIR}/${file} ${destPath}/${file}
 done
 
 # Special case for nvim
 ln -sfn "${DIR}/.vimrc" "${destPath}/.config/nvim/init.vim"
+
+# Symlink files in ~/.local/share
+for file in .local/share/*; do
+  ln -sfn ${DIR}/${file} ${destPath}/${file}
+done
