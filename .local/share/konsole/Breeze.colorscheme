@@ -1,5 +1,5 @@
 [Background]
-Color=46,52,64
+Color=47,52,64
 
 [BackgroundFaint]
 Color=72,81,100
@@ -91,6 +91,6 @@ Color=255,255,255
 [General]
 Blur=true
 ColorRandomization=false
-Description=Breeze
+Description=Nordic
 Opacity=0.85
 Wallpaper=
