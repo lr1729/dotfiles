@@ -52,17 +52,17 @@
   </Menu>
  </MenuBar>
  <ActionProperties>
-  <Action shortcut="" name="clone-tab"/>
-  <Action shortcut="" name="help_contents"/>
-  <Action shortcut="Ctrl+PgDown" name="last-used-tab"/>
-  <Action shortcut="Ctrl+PgUp" name="last-used-tab-reverse"/>
-  <Action shortcut="Shift+Right; Ctrl+Tab" name="next-tab"/>
-  <Action shortcut="Shift+Left; Ctrl+Shift+Tab" name="previous-tab"/>
-  <Action shortcut="Ctrl+Shift+Up; Alt+J" name="focus-view-above"/>
-  <Action shortcut="Ctrl+Shift+Down; Alt+K" name="focus-view-below"/>
-  <Action shortcut="Ctrl+Shift+Left; Alt+H" name="focus-view-left"/>
-  <Action shortcut="Ctrl+Shift+Right; Alt+L" name="focus-view-right"/>
-  <Action shortcut="Ctrl+)" name="split-view-left-right"/>
-  <Action shortcut="Ctrl+(" name="split-view-top-bottom"/>
+  <Action name="clone-tab" shortcut=""/>
+  <Action name="help_contents" shortcut=""/>
+  <Action name="last-used-tab" shortcut="Ctrl+PgDown"/>
+  <Action name="last-used-tab-reverse" shortcut="Ctrl+PgUp"/>
+  <Action name="next-tab" shortcut="Shift+Right; Ctrl+Tab"/>
+  <Action name="previous-tab" shortcut="Shift+Left; Ctrl+Shift+Tab"/>
+  <Action name="focus-view-above" shortcut="Ctrl+Shift+Up; Ctrl+J"/>
+  <Action name="focus-view-below" shortcut="Ctrl+Shift+Down; Ctrl+K"/>
+  <Action name="focus-view-left" shortcut="Ctrl+Shift+Left; Ctrl+H"/>
+  <Action name="focus-view-right" shortcut="Ctrl+Shift+Right; Ctrl+L"/>
+  <Action name="split-view-left-right" shortcut="Ctrl+)"/>
+  <Action name="split-view-top-bottom" shortcut="Ctrl+("/>
  </ActionProperties>
 </kpartgui>

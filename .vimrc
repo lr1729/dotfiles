@@ -52,18 +52,18 @@ augroup END
 noremap j k
 noremap k j
 " Easier keybinds to move terminals (j and k switched)
-tnoremap <C-h> <C-\><C-N><C-w>h
-tnoremap <C-k> <C-\><C-N><C-w>j
-tnoremap <C-j> <C-\><C-N><C-w>k
-tnoremap <C-l> <C-\><C-N><C-w>l
-inoremap <C-h> <C-\><C-N><C-w>h
-inoremap <C-k> <C-\><C-N><C-w>j
-inoremap <C-j> <C-\><C-N><C-w>k
-inoremap <C-l> <C-\><C-N><C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-k> <C-w>j
-nnoremap <C-j> <C-w>k
-nnoremap <C-l> <C-w>l
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-k> <C-\><C-N><C-w>j
+tnoremap <A-j> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-k> <C-\><C-N><C-w>j
+inoremap <A-j> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-k> <C-w>j
+nnoremap <A-j> <C-w>k
+nnoremap <A-l> <C-w>l
 " use jj instead of esc
 inoremap jj <ESC>
 " Esc also eximts terminal mode
@@ -120,6 +120,8 @@ let g:airline_theme='deus' " Use deus theme
 set termguicolors " True 24 bit colors for nvim
 " Flash yanked text
 au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Substitute", timeout=150, on_visual=false}
+" Disable line numbers in terminal
+au TermOpen * setlocal nonumber norelativenumber
 
 
 " =========
@@ -135,7 +137,7 @@ set whichwrap+=<,>,h,l,[,] " Wrap lines with arrow keys and hl
 set scrolloff=5 " Keeps 4 lines on edges visible when scrolling
 set title " Sets title of terminal
 set hidden " When opening a new buffer it hides old one
-" autocmd TermOpen * startinsert " Automatically enter insert mode when entering a terminal window in nvim
+autocmd TermOpen * startinsert " Automatically enter insert mode when entering a terminal window in nvim
 autocmd VimResized * wincmd = " Automatically resizes buffers on main window resize
 autocmd BufEnter,BufEnter term://* startinsert " Same as above but it actually works
 " When editing a file, always jump to the last known cursor position.
