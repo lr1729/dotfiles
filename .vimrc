@@ -115,6 +115,8 @@ autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>k:let sourcefile=expand('%:r')
 
 colorscheme apprentice " Cool color scheme
 let g:airline_powerline_fonts = 1 " Adds cool arrows to airline
+let g:airline#extensions#tabline#enabled = 1 " One line to rule them all
+let g:airline_theme='deus' " Use deus theme
 set termguicolors " True 24 bit colors for nvim
 " Flash yanked text
 au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Substitute", timeout=150, on_visual=false}
