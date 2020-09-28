@@ -106,7 +106,7 @@ autocmd FileType cpp nnoremap <F7> :Over<CR>
 autocmd FileType cpp nnoremap <F8> :Continue<CR>
 autocmd FileType cpp nnoremap <A-s> :Break<CR>
 autocmd FileType cpp nnoremap <A-c> :Clear<CR>
-autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>k:let sourcefile=expand('%:r') <CR>:w <bar> exec '!g++ -g '.shellescape('%').' -o '.shellescape('%:r').''<CR><C-\><C-n><C-w>jfile <C-\><C-n>:put =sourcefile<CR>i<CR>y<CR>y<CR>r<CR>y<CR>dv<CR>
+autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>k:let sourcefile=expand('%:r') <CR>:w <bar> exec '!g++ -O2 -Wall -g '.shellescape('%').' -o '.shellescape('%:r').''<CR><C-\><C-n><C-w>jfile <C-\><C-n>:put =sourcefile<CR>i<CR>y<CR>y<CR>r<CR>y<CR>dv<CR>
 
 
 " ==============
