@@ -25,6 +25,7 @@ snippet template "Basic template" b
 \usepackage{graphicx}
 \usepackage{float}
 \restylefloat{table}
+\usepackage{verbatim}
 \usepackage[margin=1in]{geometry}
 
 % figure support
@@ -32,6 +33,7 @@ snippet template "Basic template" b
 \usepackage{xifthen}
 \pdfminorversion=7
 \usepackage{pdfpages}
+\usepackage{transparent}
 \newcommand{\incfig}[1]{%
 	\def\svgwidth{\columnwidth}
 	\import{./figures/}{#1.pdf_tex}
