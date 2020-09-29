@@ -40,6 +40,15 @@ function usaco(){
     vim "$1".cpp
   fi
 }
+function ftex(){
+  mkdir "$1"
+  cd "$1"
+  mkdir figures
+  cd figures
+  inkscape-figures watch
+  cd ..
+  vim "$1".tex
+}
 function fcd() {
   cd $(baloosearch -l 1 type:folder "$1") 
 }

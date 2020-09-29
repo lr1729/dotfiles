@@ -41,7 +41,9 @@ let g:UltiSnipsJumpForwardTrigger = '<tab>' " Tab cycles snips
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>' "Shift-Tab cycles snips in reverse
 " Start a continuous compilation on file open
 augroup vimtex_config
-  autocmd User VimtexEventInitPost VimtexCompile
+  if filereadable(@%)
+    autocmd User VimtexEventInitPost VimtexCompile
+  endif
 augroup END
 
 " ===========
