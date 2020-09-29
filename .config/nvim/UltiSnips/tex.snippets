@@ -56,9 +56,16 @@ $0
 \end{document}
 endsnippet
 
+priority 10
 context "math()"
-snippet vec "vector arrow" iA
+snippet vec "vector" iA
 \overrightarrow{$1}$0
+endsnippet
+
+priority 100
+context "math()"
+snippet "([a-zA-Z])vec" "vector" riA
+\overrightarrow{`!p snip.rv=match.group(1)`}
 endsnippet
 
 snippet splitali "Side by side align" bA
