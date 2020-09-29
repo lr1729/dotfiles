@@ -39,6 +39,7 @@ let g:tex_conceal='abdmg' " idk
 let g:UltiSnipsExpandTrigger = '<tab>' " Tab triggers Ultisnips
 let g:UltiSnipsJumpForwardTrigger = '<tab>' " Tab cycles snips
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>' "Shift-Tab cycles snips in reverse
+let g:vimtex_mappings_enabled=0
 " Start a continuous compilation on file open
 augroup vimtex_config
   if filereadable(@%)
