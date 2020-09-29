@@ -28,6 +28,7 @@ set smartcase " Unless it starts with a capital
 syntax on " Turns on syntax highlighting
 filetype on " Automatic file type detection
 set omnifunc=ale#completion#OmniFunc " Let ALE hangle omnicompletion
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>" " Use full completion by default
 let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
 let g:ale_completion_tsserver_autoimport = 1 " Handle imports
 let g:tex_flavor='latex' " Set default filetype to LaTeX
@@ -108,11 +109,6 @@ autocmd FileType cpp nnoremap <F8> :Continue<CR>
 autocmd FileType cpp nnoremap <A-s> :Break<CR>
 autocmd FileType cpp nnoremap <A-c> :Clear<CR>
 autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>k:let sourcefile=expand('%:r') <CR>:w <bar> exec '!g++ -O2 -Wall -g '.shellescape('%').' -o '.shellescape('%:r').''<CR><C-\><C-n><C-w>jfile <C-\><C-n>:put =sourcefile<CR>i<CR>y<CR>y<CR>r<CR>y<CR>dv<CR>
-" Shift tab cycles through tabs because tab is controlled by ultisnips
-inoremap <silent><expr> <S-TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
 
 " ==============
 " = Appearance =
@@ -160,6 +156,7 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile tmux.conf.local set filetype=tmux
   autocmd BufRead,BufNewFile vimrc.local set filetype=vim
 augroup END
+autocmd FileType tex let b:coc_suggest_disable = 1
 
 " Check for file updates every second
 if ! exists("g:CheckUpdateStarted")
@@ -191,6 +188,7 @@ Plugin 'dense-analysis/ale' " Provides linting
 Plugin 'junegunn/fzf.vim' " Providez fuzzy file finding
 Plugin 'hugolgst/vimsence' " Rich precense plugin for Discord
 Plugin 'neoclide/coc.nvim', {'branch': 'release'} " Intelligent completion
+Plugin 'ervandew/supertab' " Intelligent tab autocomplete
 Plugin 'lervag/vimtex' " LaTeX utils
 Plugin 'sirver/ultisnips' " LaTeX snippets
 Plugin 'junegunn/vim-peekaboo' " Buffer preview
