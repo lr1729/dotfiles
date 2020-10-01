@@ -5,3 +5,4 @@ set adjust-open "width"
 map k scroll down
 map j scroll up
 set guioptions none
+set selection-clipboard clipboard
