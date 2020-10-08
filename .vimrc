@@ -27,24 +27,6 @@ set smartcase " Unless it starts with a capital
 
 syntax on " Turns on syntax highlighting
 filetype on " Automatic file type detection
-set omnifunc=ale#completion#OmniFunc " Let ALE hangle omnicompletion
-let g:SuperTabDefaultCompletionType = "<c-x><c-o>" " Use full completion by default
-let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
-let g:ale_completion_tsserver_autoimport = 1 " Handle imports
-let g:tex_flavor='latex' " Set default filetype to LaTeX
-let g:vimtex_view_method='zathura' " Use zathura as the viewer
-let g:vimtex_quickfix_mode=0 " Allows quickfixes
-set conceallevel=1 " Hides ugly syntax
-let g:tex_conceal='abdmg' " idk
-let g:UltiSnipsExpandTrigger = '<tab>' " Tab triggers Ultisnips
-let g:UltiSnipsJumpForwardTrigger = '<tab>' " Tab cycles snips
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>' "Shift-Tab cycles snips in reverse
-" Start a continuous compilation on file open
-augroup vimtex_config
-  if filereadable(@%)
-    autocmd User VimtexEventInitPost VimtexCompile
-  endif
-augroup END
 
 " ===========
 " = KEYMAPS =
@@ -186,12 +168,6 @@ Plugin 'vim-airline/vim-airline-themes' " Provides Airline themes
 Plugin 'flazz/vim-colorschemes' " Provides themes for vim
 Plugin 'dense-analysis/ale' " Provides linting
 Plugin 'junegunn/fzf.vim' " Providez fuzzy file finding
-Plugin 'hugolgst/vimsence' " Rich precense plugin for Discord
-Plugin 'neoclide/coc.nvim', {'branch': 'release'} " Intelligent completion
-Plugin 'ervandew/supertab' " Intelligent tab autocomplete
-Plugin 'lervag/vimtex' " LaTeX utils
-Plugin 'sirver/ultisnips' " LaTeX snippets
-Plugin 'junegunn/vim-peekaboo' " Buffer preview
 
 " ======================
 " = End of plugin list =

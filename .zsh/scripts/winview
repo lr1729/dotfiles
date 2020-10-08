@@ -1,8 +1,0 @@
-#!/bin/bash
-
-/usr/local/bin/looking-glass-client -a -m 69 -p 5901 "$1" > /dev/null 2>&1 & # Starts Looking Glass, and ignores all output, delete is the mouse capture key
-/usr/bin/scream -i virbr0 & # Starts Scream with pulse
-# OR
-
-wait -n # We wait for any of these processes to exit. (Like closing the Looking Glass window, in our case)
-pkill -P $$ # We kill the remaining processes (In our case, scream)

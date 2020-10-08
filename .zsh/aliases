@@ -3,16 +3,7 @@
 #
 alias cn='screen -r'
 alias cf='screen -x'
-alias ec2='ssh ling@18.224.40.135'
-alias ec2w='ssh pg@54.153.56.57'
 alias svim='sudo -E vim'
-alias mntpi='sudo mount.cifs //192.168.1.87/ling /mnt/pi -o uid=0,nofail,credentials=/home/ling/.smb,iocharset=utf8,noperm'
-alias winview='nohup ~/.zsh/scripts/winview >/dev/null 2>&1 &'
-alias lwine='/home/ling/.local/share/lutris/runners/wine/lutris-5.7-6-x86_64/bin/wine'
-alias pisync='~/.zsh/scripts/pisync'
-alias andstart='setsid emulator -avd Pixel_2_API_30'
-alias winstart='virsh -c qemu:///system start win10'
-alias winstop='virsh -c qemu:///system shutdown win10'
 alias ....='cd ../..'
 alias :e=vim
 alias :qa=exit
@@ -27,38 +18,6 @@ alias ga='git add'
 alias gaa='git add --all'
 alias gc='git commit -m'
 alias gp='git push'
-alias rm='trash'
-alias umirror='curl -s "https://www.archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - | sudo dd of=/etc/pacman.d/mirrorlist'
-function usaco(){
-  if [ -z "$1" ]; then
-    cd usaco
-  else
-    mkdir "$1"
-    cd "$1"
-    touch "$1".in
-    touch "$1".out
-    vim "$1".cpp
-  fi
-}
-function ftex(){
-  mkdir "$1"
-  cd "$1"
-  mkdir figures
-  cd figures
-  inkscape-figures watch
-  cd ..
-  vim "$1".tex
-}
-function fcd() {
-  cd $(baloosearch -l 1 type:folder "$1") 
-}
-function ccsv() {
-    mcs -out:"$1" "$1.cs"
-    mono "$1"
-}
-function ccs() {
-    mcs -out:"$1" "$1.cs"
-}
 function gacp() {
     git add .
     git commit -a -m "$1"
