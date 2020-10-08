@@ -42,8 +42,3 @@ done
 
 # Special case for nvim
 ln -sfn "${DIR}/.vimrc" "${destPath}/.config/nvim/init.vim"
-
-# Symlink files in ~/.local/share
-for file in .local/share/*; do
-  ln -sfn ${DIR}/${file} ${destPath}/${file}
-done
