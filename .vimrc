@@ -167,9 +167,9 @@ function! CheckUpdate(timer)
 silent! checktime
   call timer_start(1000,'CheckUpdate')
 endfunction
+" Loads buffer script
+source ~/.vim/scripts/bclose.vim
 
-" Loads Vundle
-source ~/.vim/bundle/bclose.vim
 "Add Vundle to runtime path
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
