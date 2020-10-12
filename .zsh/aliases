@@ -3,8 +3,6 @@
 #
 alias cn='screen -r'
 alias cf='screen -x'
-alias ec2='ssh ling@18.224.40.135'
-alias ec2w='ssh pg@54.153.56.57'
 alias svim='sudo -E vim'
 alias mntpi='sudo mount.cifs //192.168.1.87/ling /mnt/pi -o uid=0,nofail,credentials=/home/ling/.smb,iocharset=utf8,noperm'
 alias winview='nohup ~/.zsh/scripts/winview >/dev/null 2>&1 &'
@@ -49,8 +47,18 @@ function ftex(){
   cd ..
   vim "$1".tex
 }
+
 function fcd() {
-  cd $(baloosearch -l 1 type:folder "$1") 
+  local DIR
+  DIR=$(bfs -type d 2> /dev/null | sk --no-multi --preview='test -n "{}" && ls {}' ~q "$*") && cd "$DIR"
+}
+
+function fd() {
+  local DIR
+  DIR=$(bfs -type d 2> /dev/null | sk --no-multi --preview='test -n "{}" && ls {}' -q "$*") && cd "$DIR"
+}
+function fh() {
+  print -z $(fc -l 1 | sk --no-multi --tac -q "$*" | sed 's/ *[0-9]*\*\{0,1\} *//')
 }
 function ccsv() {
     mcs -out:"$1" "$1.cs"

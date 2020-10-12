@@ -228,6 +228,7 @@ bindkey '^Z' fg-bg
 #
 
 source $HOME/.zsh/aliases
+source $HOME/.zsh/functions
 source $HOME/.zsh/exports
 
 #
