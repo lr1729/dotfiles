@@ -27,51 +27,6 @@ alias gc='git commit -m'
 alias gp='git push'
 alias rm='trash'
 alias umirror='curl -s "https://www.archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - | sudo dd of=/etc/pacman.d/mirrorlist'
-function usaco(){
-  if [ -z "$1" ]; then
-    cd usaco
-  else
-    mkdir "$1"
-    cd "$1"
-    touch "$1".in
-    touch "$1".out
-    vim "$1".cpp
-  fi
-}
-function ftex(){
-  mkdir "$1"
-  cd "$1"
-  mkdir figures
-  cd figures
-  inkscape-figures watch
-  cd ..
-  vim "$1".tex
-}
-
-function fcd() {
-  local DIR
-  DIR=$(bfs -type d 2> /dev/null | sk --no-multi --preview='test -n "{}" && ls {}' ~q "$*") && cd "$DIR"
-}
-
-function fd() {
-  local DIR
-  DIR=$(bfs -type d 2> /dev/null | sk --no-multi --preview='test -n "{}" && ls {}' -q "$*") && cd "$DIR"
-}
-function fh() {
-  print -z $(fc -l 1 | sk --no-multi --tac -q "$*" | sed 's/ *[0-9]*\*\{0,1\} *//')
-}
-function ccsv() {
-    mcs -out:"$1" "$1.cs"
-    mono "$1"
-}
-function ccs() {
-    mcs -out:"$1" "$1.cs"
-}
-function gacp() {
-    git add .
-    git commit -a -m "$1"
-    git push
-}
 alias h=history
 alias l='ls -F'
 alias ls='ls --color=auto'
