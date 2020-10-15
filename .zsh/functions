@@ -27,7 +27,7 @@ function fad() {
 
 function fd() {
   local DIR
-  DIR=$(bfs -type d 2> /dev/null | sk --no-multi --preview='test -n "{}" && ls {}' -q "$*") && cd "$DIR"
+  DIR=$(bfs \( -path ./.wine -o -path ./wine -o -path ./linux-tkg \) -prune -false -o -type d 2> /dev/null | sk --no-multi --preview='test -n "{}" && ls {}' -q "$*") && cd "$DIR"
 }
 
 function fh() {
