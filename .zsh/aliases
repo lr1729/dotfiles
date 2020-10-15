@@ -30,12 +30,12 @@ alias diff='diff --color=auto'
 alias s=ssh
 alias t=tmux
 alias v=vim
+alias ls='exa --color=always --group-directories-first'
+alias l='ls'
+alias ll='exa -la --color=always --group-directories-first --git'
 
 #
 # Global aliases
 # (work at any position within the command line)
 #
 
-alias -g ls='exa --color=always --group-directories-first'
-alias -g l='ls'
-alias -g ll='exa -la --color=always --group-directories-first --git'
