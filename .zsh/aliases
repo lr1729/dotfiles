@@ -6,7 +6,6 @@ alias cf='screen -x'
 alias svim='sudo -E vim'
 alias mntpi='sudo mount.cifs //192.168.1.87/ling /mnt/pi -o uid=0,nofail,credentials=/home/ling/.smb,iocharset=utf8,noperm'
 alias winview='nohup ~/.zsh/scripts/winview >/dev/null 2>&1 &'
-alias lwine='/home/ling/.local/share/lutris/runners/wine/lutris-5.7-6-x86_64/bin/wine'
 alias andstart='setsid emulator -avd Pixel_2_API_30'
 alias winstart='virsh -c qemu:///system start win10'
 alias winstop='virsh -c qemu:///system shutdown win10'
@@ -27,10 +26,7 @@ alias gp='git push'
 alias rm='trash'
 alias umirror='curl -s "https://www.archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - | sudo dd of=/etc/pacman.d/mirrorlist'
 alias h=history
-alias l='ls -F'
-alias ls='exa --color=always --group-directories-first'
 alias diff='diff --color=auto'
-alias ll='exa -la --color=always --group-directories-first --git'
 alias s=ssh
 alias t=tmux
 alias v=vim
@@ -40,4 +36,6 @@ alias v=vim
 # (work at any position within the command line)
 #
 
-
+alias -g ls='exa --color=always --group-directories-first'
+alias -g l='ls'
+alias -g ll='exa -la --color=always --group-directories-first --git'
