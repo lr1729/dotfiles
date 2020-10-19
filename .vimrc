@@ -50,21 +50,18 @@ augroup END
 " = KEYMAPS =
 " ===========
 
-" Switch j and k for better colemak navigation
-noremap j k
-noremap k j
-" Easier keybinds to move terminals (j and k switched)
+" Easier keybinds to move terminals
 tnoremap <A-h> <C-\><C-N><C-w>h
-tnoremap <A-k> <C-\><C-N><C-w>j
-tnoremap <A-j> <C-\><C-N><C-w>k
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-j> <C-\><C-N><C-w>j
 tnoremap <A-l> <C-\><C-N><C-w>l
 inoremap <A-h> <C-\><C-N><C-w>h
-inoremap <A-k> <C-\><C-N><C-w>j
-inoremap <A-j> <C-\><C-N><C-w>k
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-j> <C-\><C-N><C-w>j
 inoremap <A-l> <C-\><C-N><C-w>l
 nnoremap <A-h> <C-w>h
-nnoremap <A-k> <C-w>j
-nnoremap <A-j> <C-w>k
+nnoremap <A-k> <C-w>k
+nnoremap <A-j> <C-w>j
 nnoremap <A-l> <C-w>l
 " use jj instead of esc
 inoremap jj <ESC>

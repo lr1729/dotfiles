@@ -6,7 +6,5 @@ set completion-bg rgba(47,52,64,0.90)
 set index-bg rgba(47,52,64,0)
 set recolor-lightcolor rgba(0,0,0,0)
 set adjust-open "width"
-map k scroll down
-map j scroll up
 set guioptions sv
 set selection-clipboard clipboard
