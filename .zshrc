@@ -231,6 +231,9 @@ source $HOME/.zsh/aliases
 source $HOME/.zsh/functions
 source $HOME/.zsh/exports
 
+# Automatically search for packages to an unknown command
+source /usr/share/doc/pkgfile/command-not-found.zsh
+
 #
 # Third-party
 #
