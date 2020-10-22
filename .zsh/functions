@@ -23,7 +23,7 @@ function ftex(){
 
 function fad() {
   local DIR
-  DIR=$(bfs \( -path ~/.wine -o -path ~/wine -o -path ~/linux-tkg \) -prune -false -o -L ~ -type d 2> /dev/null | sk --no-multi --preview='test -n "{}" && ls {}' -q "$*") && cd "$DIR"
+  DIR=$(bfs \( -path ~/.wine -o -path ~/wine -o -path ~/linux-tkg \) -prune -false -o -f ~ -type d 2> /dev/null | sk --no-multi --preview='test -n "{}" && ls {}' -q "$*") && cd "$DIR"
 }
 
 function fd() {
