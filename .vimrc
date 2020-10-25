@@ -184,8 +184,8 @@ Plugin 'flazz/vim-colorschemes' " Provides themes for vim
 Plugin 'dense-analysis/ale' " Provides linting
 Plugin 'junegunn/fzf.vim' " Providez fuzzy file finding
 Plugin 'hugolgst/vimsence' " Rich precense plugin for Discord
-Plugin 'neoclide/coc.nvim', {'branch': 'release'} " Intelligent completion
 Plugin 'ervandew/supertab' " Intelligent tab autocomplete
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'lervag/vimtex' " LaTeX utils
 Plugin 'sirver/ultisnips' " LaTeX snippets
 Plugin 'junegunn/vim-peekaboo' " Buffer preview
