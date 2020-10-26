@@ -30,7 +30,7 @@ alias h=history
 alias diff='diff --color=auto'
 alias s=ssh
 alias t=tmux
-alias v=vim
+alias v=nvim
 alias ls='exa --color=always --group-directories-first'
 alias l='ls'
 alias ll='exa -la --color=always --group-directories-first --git'
