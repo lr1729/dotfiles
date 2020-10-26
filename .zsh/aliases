@@ -3,7 +3,7 @@
 #
 alias cn='screen -r'
 alias cf='screen -x'
-alias sv='sudo -E vim'
+alias sv='sudo -E nvim'
 alias mntpi='sudo mount.cifs //192.168.1.87/ling /mnt/pi -o uid=0,nofail,credentials=/home/ling/.smb,iocharset=utf8,noperm'
 alias backup='screen -S backup -dm bash  -c "~/.zsh/scripts/backup"'
 alias winview='nohup ~/.zsh/scripts/winview >/dev/null 2>&1 &'
@@ -11,7 +11,7 @@ alias andstart='setsid emulator -avd Pixel_2_API_30'
 alias winstart='virsh -c qemu:///system start win10'
 alias winstop='virsh -c qemu:///system shutdown win10'
 alias ....='cd ../..'
-alias :e=vim
+alias :e=nvim
 alias :qa=exit
 alias :sp='test -n "$TMUX" && tmux split-window'
 alias :vs='test -n "$TMUX" && tmux split-window -h'
