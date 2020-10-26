@@ -5,7 +5,7 @@ alias cn='screen -r'
 alias cf='screen -x'
 alias svim='sudo -E vim'
 alias ....='cd ../..'
-alias :e=vim
+alias :e=nvim
 alias :qa=exit
 alias :sp='test -n "$TMUX" && tmux split-window'
 alias :vs='test -n "$TMUX" && tmux split-window -h'
@@ -30,7 +30,7 @@ alias diff='diff --color=auto'
 alias ll='ls -laF'
 alias s=ssh
 alias t=tmux
-alias v=vim
+alias v=nvim
 
 #
 # Global aliases
