@@ -64,9 +64,6 @@ noremap <Leader>D "*d
 nnoremap <Space> i_<Esc>r
 " Control o opens nerdtree
 map <C-o> :NERDTreeToggle<CR>
-" Move between linting errors
-nnoremap ]r :ALENextWrap<CR>
-nnoremap [r :ALEPreviousWrap<CR>
 " Map Ctrl + p to open fuzzy find (FZF)
 nnoremap <c-p> :Files<cr>
 " Lose the arrow keys
@@ -166,7 +163,6 @@ Plugin 'inside/vim-search-pulse' " Pulses search results
 Plugin 'vim-airline/vim-airline' " Provides Airline bar
 Plugin 'vim-airline/vim-airline-themes' " Provides Airline themes
 Plugin 'flazz/vim-colorschemes' " Provides themes for vim
-Plugin 'dense-analysis/ale' " Provides linting
 Plugin 'junegunn/fzf.vim' " Providez fuzzy file finding
 
 " ======================
