@@ -3,7 +3,7 @@
 #
 alias cn='screen -r'
 alias cf='screen -x'
-alias svim='sudo -E vim'
+alias sv='sudo -E nvim'
 alias ....='cd ../..'
 alias :e=nvim
 alias :qa=exit
