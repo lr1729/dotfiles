@@ -152,7 +152,6 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile vimrc.local set filetype=vim
 augroup END
 autocmd FileType tex let b:coc_suggest_disable = 1
-
 " Check for file updates every second
 if ! exists("g:CheckUpdateStarted")
 let g:CheckUpdateStarted=1
@@ -165,6 +164,7 @@ endfunction
 " Loads buffer script
 source ~/.vim/scripts/bclose.vim
 
+" Start loading plugins
 call plug#begin()
 
 " ===========
