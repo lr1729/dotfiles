@@ -111,15 +111,14 @@ autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>k:let sourcefile=expand('%:r')
 " = Appearance =
 " ==============
 
-colorscheme apprentice " Cool color scheme
 let g:airline_powerline_fonts = 1 " Adds cool arrows to airline
 let g:airline#extensions#tabline#enabled = 1 " One line to rule them all
-let g:airline_theme='deus' " Use deus theme
 set termguicolors " True 24 bit colors for nvim
 " Flash yanked text
 au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Substitute", timeout=150, on_visual=false}
 " Disable line numbers in terminal
 au TermOpen * setlocal nonumber norelativenumber
+colorscheme nord " Apply nord color scheme
 
 
 " =========
@@ -127,7 +126,6 @@ au TermOpen * setlocal nonumber norelativenumber
 " =========
 
 " set mouse=a " Can use mouse for yanking
-set backspace=2   " Backspace deletes like most programs in insert mode
 set splitbelow " Opens new buffers below
 set splitright " Opens new buffers to the right
 set nojoinspaces " Something about joining lines and spaces
@@ -167,37 +165,33 @@ endfunction
 " Loads buffer script
 source ~/.vim/scripts/bclose.vim
 
-"Add Vundle to runtime path
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
+call plug#begin()
 
-" ========================
-" = Add new plugins here =
-" ========================
+" ===========
+" = Plugins =
+" ===========
 
-Plugin 'scrooloose/nerdtree' " Provides IDE-like file hierarchy browser
-Plugin 'inside/vim-search-pulse' " Pulses search results
-Plugin 'vim-airline/vim-airline' " Provides Airline bar
-Plugin 'vim-airline/vim-airline-themes' " Provides Airline themes
-Plugin 'flazz/vim-colorschemes' " Provides themes for vim
-Plugin 'dense-analysis/ale' " Provides linting
-Plugin 'junegunn/fzf.vim' " Providez fuzzy file finding
-Plugin 'hugolgst/vimsence' " Rich precense plugin for Discord
-Plugin 'ervandew/supertab' " Intelligent tab autocomplete
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-Plugin 'lervag/vimtex' " LaTeX utils
-Plugin 'sirver/ultisnips' " LaTeX snippets
-Plugin 'junegunn/vim-peekaboo' " Buffer preview
+Plug 'scrooloose/nerdtree' " Provides IDE-like file hierarchy browser
+Plug 'inside/vim-search-pulse' " Pulses search results
+Plug 'vim-airline/vim-airline' " Provides Airline bar
+Plug 'dense-analysis/ale' " Provides linting
+Plug 'junegunn/fzf.vim' " Providez fuzzy file finding
+Plug 'hugolgst/vimsence' " Rich precense Plug for Discord
+Plug 'ervandew/supertab' " Intelligent tab autocomplete
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'lervag/vimtex' " LaTeX utils
+Plug 'sirver/ultisnips' " LaTeX snippets
+Plug 'junegunn/vim-peekaboo' " Buffer preview
+Plug 'arcticicestudio/nord-vim' " Nord colorscheme
 
 " ======================
 " = End of plugin list =
 " ======================
 
-call vundle#end()
+call plug#end()
 
 " =============================
-" = Post Vundle Configuration =
+" = Post plugin Configuration =
 " =============================
 
 " Enable transparent backgrounds
