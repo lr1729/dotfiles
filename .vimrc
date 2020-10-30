@@ -27,6 +27,7 @@ set smartcase " Unless it starts with a capital
 
 syntax on " Turns on syntax highlighting
 filetype on " Automatic file type detection
+set conceallevel=2 " Hides unneeded syntax
 set omnifunc=ale#completion#OmniFunc " Let ALE hangle omnicompletion
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>" " Use full completion by default
 let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
@@ -34,7 +35,6 @@ let g:ale_completion_tsserver_autoimport = 1 " Handle imports
 let g:tex_flavor='latex' " Set default filetype to LaTeX
 let g:vimtex_view_method='zathura' " Use zathura as the viewer
 let g:vimtex_quickfix_mode=0 " Allows quickfixes
-set conceallevel=1 " Hides ugly syntax
 let g:tex_conceal='abdmg' " idk
 let g:UltiSnipsExpandTrigger = '<tab>' " Tab triggers Ultisnips
 let g:UltiSnipsJumpForwardTrigger = '<tab>' " Tab cycles snips
