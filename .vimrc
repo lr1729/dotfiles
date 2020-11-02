@@ -27,7 +27,7 @@ set smartcase " Unless it starts with a capital
 
 syntax on " Turns on syntax highlighting
 filetype on " Automatic file type detection
-set conceallevel=2 " Hides unneeded syntax
+set conceallevel=1 " Hides unneeded syntax
 set omnifunc=ale#completion#OmniFunc " Let ALE hangle omnicompletion
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>" " Use full completion by default
 let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
@@ -197,3 +197,5 @@ call plug#end()
 
 " Enable transparent backgrounds
 hi! Normal ctermbg=NONE guibg=NONE
+" Fix colors for concealed text
+hi clear Conceal
