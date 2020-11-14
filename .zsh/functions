@@ -49,3 +49,6 @@ function gacp() {
     git commit -a -m "$1"
     git push
 }
+function lg() {
+  nohup ~/.zsh/scripts/winview "$@" >/dev/null 2>&1 &
+}

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-/usr/local/bin/looking-glass-client -a -m 69 -p 5901 "$1" > /dev/null 2>&1 & # Starts Looking Glass, and ignores all output, delete is the mouse capture key
+/usr/bin/looking-glass-client -a -m 69 -p 5901 "$@" > /dev/null 2>&1 & # Starts Looking Glass, and ignores all output, delete is the mouse capture key
 /usr/bin/scream -i virbr0 & # Starts Scream with pulse
 # OR
 
