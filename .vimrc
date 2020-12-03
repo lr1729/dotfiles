@@ -27,26 +27,24 @@ set smartcase " Unless it starts with a capital
 
 syntax on " Turns on syntax highlighting
 filetype on " Automatic file type detection
+set conceallevel=1 " Hides unneeded syntax
 
 " ===========
 " = KEYMAPS =
 " ===========
 
-" Switch j and k for better colemak navigation
-noremap j k
-noremap k j
-" Easier keybinds to move terminals (j and k switched)
+" Easier keybinds to move terminals
 tnoremap <A-h> <C-\><C-N><C-w>h
-tnoremap <A-k> <C-\><C-N><C-w>j
-tnoremap <A-j> <C-\><C-N><C-w>k
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-j> <C-\><C-N><C-w>j
 tnoremap <A-l> <C-\><C-N><C-w>l
 inoremap <A-h> <C-\><C-N><C-w>h
-inoremap <A-k> <C-\><C-N><C-w>j
-inoremap <A-j> <C-\><C-N><C-w>k
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-j> <C-\><C-N><C-w>j
 inoremap <A-l> <C-\><C-N><C-w>l
 nnoremap <A-h> <C-w>h
-nnoremap <A-k> <C-w>j
-nnoremap <A-j> <C-w>k
+nnoremap <A-k> <C-w>k
+nnoremap <A-j> <C-w>j
 nnoremap <A-l> <C-w>l
 " use jj instead of esc
 inoremap jj <ESC>
@@ -66,42 +64,26 @@ nnoremap <Space> i_<Esc>r
 map <C-o> :NERDTreeToggle<CR>
 " Map Ctrl + p to open fuzzy find (FZF)
 nnoremap <c-p> :Files<cr>
-" Lose the arrow keys
 noremap <Leader>s :w<CR> " \s for quicksave
 inoremap <C-s> <C-o>:w<CR>
-inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
-nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 " Enable spellcheck
 autocmd FileType latex,tex,md,markdown setlocal spell
 set spelllang=en
 " Autocorrect
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
-" One key compile and run for c++
-autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ -O2 -Wall -g '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
-" One key debug for c++
-packadd termdebug
-autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ -O2 -Wall -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR> :Termdebug %:r<CR><C-\><C-n>:set filetype=gdb<CR><C-w>k<C-\><C-n>:q<CR>
-" Debug shortcuts for c++
-autocmd FileType cpp nnoremap <F6> :Run<CR>
-autocmd FileType cpp nnoremap <F7> :Over<CR>
-autocmd FileType cpp nnoremap <F8> :Continue<CR>
-autocmd FileType cpp nnoremap <A-s> :Break<CR>
-autocmd FileType cpp nnoremap <A-c> :Clear<CR>
-autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>k:let sourcefile=expand('%:r') <CR>:w <bar> exec '!g++ -O2 -Wall -g '.shellescape('%').' -o '.shellescape('%:r').''<CR><C-\><C-n><C-w>jfile <C-\><C-n>:put =sourcefile<CR>i<CR>y<CR>y<CR>r<CR>y<CR>dv<CR>
 
 " ==============
 " = Appearance =
 " ==============
 
-colorscheme apprentice " Cool color scheme
 let g:airline_powerline_fonts = 1 " Adds cool arrows to airline
 let g:airline#extensions#tabline#enabled = 1 " One line to rule them all
-let g:airline_theme='deus' " Use deus theme
 set termguicolors " True 24 bit colors for nvim
 " Flash yanked text
 au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Substitute", timeout=150, on_visual=false}
 " Disable line numbers in terminal
 au TermOpen * setlocal nonumber norelativenumber
+colorscheme nord " Apply nord color scheme
 
 
 " =========
@@ -109,7 +91,6 @@ au TermOpen * setlocal nonumber norelativenumber
 " =========
 
 " set mouse=a " Can use mouse for yanking
-set backspace=2   " Backspace deletes like most programs in insert mode
 set splitbelow " Opens new buffers below
 set splitright " Opens new buffers to the right
 set nojoinspaces " Something about joining lines and spaces
@@ -136,7 +117,6 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile vimrc.local set filetype=vim
 augroup END
 autocmd FileType tex let b:coc_suggest_disable = 1
-
 " Check for file updates every second
 if ! exists("g:CheckUpdateStarted")
 let g:CheckUpdateStarted=1
@@ -149,31 +129,31 @@ endfunction
 " Loads buffer script
 source ~/.vim/scripts/bclose.vim
 
-"Add Vundle to runtime path
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
+" Start loading plugins
+call plug#begin()
 
-" ========================
-" = Add new plugins here =
-" ========================
+" ===========
+" = Plugins =
+" ===========
 
-Plugin 'scrooloose/nerdtree' " Provides IDE-like file hierarchy browser
-Plugin 'inside/vim-search-pulse' " Pulses search results
-Plugin 'vim-airline/vim-airline' " Provides Airline bar
-Plugin 'vim-airline/vim-airline-themes' " Provides Airline themes
-Plugin 'flazz/vim-colorschemes' " Provides themes for vim
-Plugin 'junegunn/fzf.vim' " Providez fuzzy file finding
+Plug 'scrooloose/nerdtree' " Provides IDE-like file hierarchy browser
+Plug 'inside/vim-search-pulse' " Pulses search results
+Plug 'vim-airline/vim-airline' " Provides Airline bar
+Plug 'junegunn/fzf.vim' " Providez fuzzy file finding
+Plug 'junegunn/vim-peekaboo' " Buffer preview
+Plug 'arcticicestudio/nord-vim' " Nord colorscheme
 
 " ======================
 " = End of plugin list =
 " ======================
 
-call vundle#end()
+call plug#end()
 
 " =============================
-" = Post Vundle Configuration =
+" = Post plugin Configuration =
 " =============================
 
 " Enable transparent backgrounds
 hi! Normal ctermbg=NONE guibg=NONE
+" Fix colors for concealed text
+hi clear Conceal
