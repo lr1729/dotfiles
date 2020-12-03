@@ -83,7 +83,6 @@ set termguicolors " True 24 bit colors for nvim
 au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Substitute", timeout=150, on_visual=false}
 " Disable line numbers in terminal
 au TermOpen * setlocal nonumber norelativenumber
-colorscheme nord " Apply nord color scheme
 
 
 " =========
@@ -157,3 +156,4 @@ call plug#end()
 hi! Normal ctermbg=NONE guibg=NONE
 " Fix colors for concealed text
 hi clear Conceal
+colorscheme nord " Apply nord color scheme
