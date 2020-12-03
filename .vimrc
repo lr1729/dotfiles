@@ -152,8 +152,8 @@ call plug#end()
 " = Post plugin Configuration =
 " =============================
 
+colorscheme nord " Apply nord color scheme
 " Enable transparent backgrounds
 hi! Normal ctermbg=NONE guibg=NONE
 " Fix colors for concealed text
 hi clear Conceal
-colorscheme nord " Apply nord color scheme
