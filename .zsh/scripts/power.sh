@@ -17,8 +17,8 @@ fi
 echo $STATE
 
 if [[ $STATE == "BAT" ]]; then
-  echo "Discharging, set governor to powersave"
-  cpupower frequency-set -g powersave
+  echo "Discharging, set governor to ondemand"
+  cpupower frequency-set -g ondemand
 elif [[ $STATE == "AC"  ]]; then
   echo "AC plugged in, set governor to performance"
   cpupower frequency-set -g performance
