@@ -175,7 +175,6 @@ Plug 'inside/vim-search-pulse' " Pulses search results
 Plug 'vim-airline/vim-airline' " Provides Airline bar
 Plug 'dense-analysis/ale' " Provides linting
 Plug 'junegunn/fzf.vim' " Providez fuzzy file finding
-Plug 'hugolgst/vimsence' " Rich precense Plug for Discord
 Plug 'ervandew/supertab' " Intelligent tab autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'lervag/vimtex' " LaTeX utils
