@@ -181,7 +181,6 @@ Plug 'lervag/vimtex' " LaTeX utils
 Plug 'sirver/ultisnips' " LaTeX snippets
 Plug 'junegunn/vim-peekaboo' " Buffer preview
 Plug 'arcticicestudio/nord-vim' " Nord colorscheme
-Plug 'mhinz/vim-startify' " Vim start screen
 
 " ======================
 " = End of plugin list =
