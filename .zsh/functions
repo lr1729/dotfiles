@@ -21,6 +21,7 @@ function cpd(){
     mkdir "$1"
     cd "$1"
     touch "$1".in
+    touch "$1".out
     vim "$1".cpp
   fi
 }
