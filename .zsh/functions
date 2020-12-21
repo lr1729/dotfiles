@@ -20,6 +20,7 @@ function cpd(){
   else
     mkdir "$1"
     cd "$1"
+    touch "$1".in
     vim "$1".cpp
   fi
 }
