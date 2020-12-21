@@ -1,15 +1,3 @@
-function usaco(){
-  if [ -z "$1" ]; then
-    cd usaco
-  else
-    mkdir "$1"
-    cd "$1"
-    touch "$1".in
-    touch "$1".out
-    vim "$1".cpp
-  fi
-}
-
 function ftex(){
   killall inkscape-figures
   mkdir "$1"
