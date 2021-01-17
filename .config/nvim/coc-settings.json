@@ -10,8 +10,5 @@
          }
        }
     }
-  },
-  "rpc.ignoreWorkspaces": ["ling"],
-  "rpc.workspaceElapsedTime": true,
-  "rpc.hideStartupMessage": true
+  }
 }
