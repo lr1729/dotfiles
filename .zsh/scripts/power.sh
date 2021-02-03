@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+# Reference: https://bbs.archlinux.org/viewtopic.php?id=207186
+
 STATE=""
 BAT="BAT0"
 
@@ -19,7 +21,9 @@ echo $STATE
 if [[ $STATE == "BAT" ]]; then
   echo "Discharging, set governor to ondemand"
   cpupower frequency-set -g ondemand
+  kilall conky
 elif [[ $STATE == "AC"  ]]; then
   echo "AC plugged in, set governor to performance"
   cpupower frequency-set -g performance
+  sh "/home/ling/.conky/conky-startup.sh"
 fi
