@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui version="13" translationDomain="konsole" name="konsolepart">
+<kpartgui name="konsolepart" version="13" translationDomain="konsole">
  <Menu name="session-popup-menu">
   <Action name="edit_copy_contextmenu"/>
   <Action name="edit_paste"/>
