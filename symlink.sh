@@ -9,7 +9,7 @@ else
 fi
 
 # Exclude .config folder to be symliked seperately and ignore other files
-exclude=(".config" ".git" ".gitignore" "symlink.sh")
+exclude=(".config" ".git" ".gitignore" "symlink.sh" ".local")
 
 # Match hidden files with globbing
 shopt -s dotglob
@@ -42,6 +42,8 @@ done
 
 # Special case for nvim
 ln -sfn "${DIR}/.vimrc" "${destPath}/.config/nvim/init.vim"
+
+mkdir -p ${destPath}/.local/share # Create a .local folder if it doesn't already exist
 
 # Symlink files in ~/.local/share
 for file in .local/share/*; do

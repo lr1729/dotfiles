@@ -1,0 +1,28 @@
+[Appearance]
+Blur=true
+Skin=breeze_dark
+SkinInstalledWithKns=true
+Translucency=true
+
+[Desktop Entry]
+DefaultProfile=Profile 1.profile
+
+[Dialogs]
+FirstRun=false
+
+[DownloadDialog Settings]
+eDP-1 Height 1366x768=494
+eDP-1 Width 1366x768=700
+
+[KFileDialog Settings]
+detailViewIconSize=16
+
+[Shortcuts]
+next-session=Shift+Right; Ctrl+Tab
+previous-session=Shift+Left; Ctrl+Shift+Tab
+
+[Window]
+Height=54
+ShowSystrayIcon=false
+ShowTabBar=false
+Width=50
