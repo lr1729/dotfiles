@@ -30,6 +30,7 @@ endsnippet
 
 snippet template "Basic template" b
 \documentclass[12pt]{article}
+\usepackage{extsizes}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
@@ -111,9 +112,60 @@ snippet box "Box"
 $\boxed{$1}$
 endsnippet
 
+snippet tb "table row" iA
+$1 & $2 & $3 \\\\ \hline
+$0
+endsnippet
+
+snippet tab "table" 
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{2cm}|p{1.5cm}|p{12cm}|}
+\hline
+$1 & $2 & $3 \\\\ \hline
+$4 & $5 & $6 \\\\ \hline
+$0
+\end{tabular}
+\end{table}
+endsnippet
+
 context "math()"
 snippet box "Box" iA
 \boxed{$1}
+endsnippet
+
+snippet in "indent"
+\indent 
+endsnippet
+
+snippet ni "no indent"
+\noindent 
+endsnippet
+
+snippet inn "indent"
+\indent\indent 
+endsnippet
+
+snippet innn "indent"
+\indent\indent\indent 
+endsnippet
+
+snippet sk "small skip"
+
+\smallskip
+
+endsnippet
+
+snippet mk "medium skip"
+
+\medskip
+
+endsnippet
+
+snippet bk "big skip"
+
+\bigskip
+
 endsnippet
 
 context "math()"
@@ -132,14 +184,14 @@ snippet '\s([a-zA-Z])' "Single letters" rw
 endsnippet
 
 context "not math()"
-snippet '([a-z]?[a-z])\)' "Problem sub lettering" brA
+snippet '([a-z]?[a-z])\)' "Problem sub lettering" br
 
 \medskip
 \indent `!p snip.rv = match.group(1)`)
 endsnippet
 
 context "not math()"
-snippet '(\d?\d)\.' "Problem numbering" brA
+snippet '(\d?\d)\.' "Problem numbering" br
 
 \medskip
 \noindent `!p snip.rv = match.group(1)`.
@@ -479,10 +531,6 @@ endsnippet
 
 snippet uuu "bigcup" iA
 \bigcup_{${1:i \in ${2: I}}} $0
-endsnippet
-
-snippet nnn "bigcap" iA
-\bigcap_{${1:i \in ${2: I}}} $0
 endsnippet
 
 snippet OO "emptyset" iA
