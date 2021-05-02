@@ -28,10 +28,10 @@ set smartcase " Unless it starts with a capital
 syntax on " Turns on syntax highlighting
 filetype on " Automatic file type detection
 set conceallevel=1 " Hides unneeded syntax
-set omnifunc=ale#completion#OmniFunc " Let ALE hangle omnicompletion
+set omnifunc=ale#completion#OmniFunc " Let ALE handle omnicompletion
+let g:ale_disable_lsp = 1 " Let Coc handle lsp
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>" " Use full completion by default
 let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
-let g:ale_completion_tsserver_autoimport = 1 " Handle imports
 let g:tex_flavor='latex' " Set default filetype to LaTeX
 let g:vimtex_view_method='zathura' " Use zathura as the viewer
 let g:vimtex_quickfix_mode=0 " Allows quickfixes
@@ -106,11 +106,6 @@ autocmd FileType cpp nnoremap <F8> :Continue<CR>
 autocmd FileType cpp nnoremap <A-s> :Break<CR>
 autocmd FileType cpp nnoremap <A-c> :Clear<CR>
 autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>k:let sourcefile=expand('%:r') <CR>:w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').''<CR><C-\><C-n><C-w>jfile <C-\><C-n>:put =sourcefile<CR>i<CR>y<CR>y<CR>r<CR>y<CR>dv<CR>
-" Don't use javac
-let g:ale_java_eclipselsp_path = '$HOME/Documents/programming/eclipse.jdt.ls'
-let g:ale_linters = {
-\   'java': ['eclipselsp'],
-\}
 
 " ==============
 " = Appearance =
