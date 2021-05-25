@@ -181,6 +181,7 @@ Plug 'lervag/vimtex' " LaTeX utils
 Plug 'sirver/ultisnips' " LaTeX snippets
 Plug 'junegunn/vim-peekaboo' " Buffer preview
 Plug 'arcticicestudio/nord-vim' " Nord colorscheme
+Plug 'easymotion/vim-easymotion' " Faster movement
 
 " ======================
 " = End of plugin list =

@@ -22,7 +22,7 @@ next-session=Shift+Right; Ctrl+Tab
 previous-session=Shift+Left; Ctrl+Shift+Tab
 
 [Window]
-Height=57
+Height=65
 ShowSystrayIcon=false
 ShowTabBar=false
 Width=50
