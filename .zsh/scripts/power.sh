@@ -18,12 +18,14 @@ fi
 
 echo $STATE
 
+AC="ondemand"
+BAT="ondemand"
 if [[ $STATE == "BAT" ]]; then
-  echo "Discharging, set governor to ondemand"
-  cpupower frequency-set -g ondemand
+  echo "Discharging, set governor to ${BAT}"
+  cpupower frequency-set -g ${BAT}
   runuser -l ling -c 'XDG_RUNTIME_DIR=/run/user/$UID systemctl --user stop conky.service'
 elif [[ $STATE == "AC"  ]]; then
-  echo "AC plugged in, set governor to performance"
-  cpupower frequency-set -g performance
+  echo "AC plugged in, set governor to ${AC}"
+  cpupower frequency-set -g ${AC}
   runuser -l ling -c 'XDG_RUNTIME_DIR=/run/user/$UID systemctl --user start conky.service'
 fi
