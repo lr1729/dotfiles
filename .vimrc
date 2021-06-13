@@ -20,6 +20,10 @@ set hlsearch " Highlight searches
 set incsearch " Incremental Search
 set ignorecase " Ignores case when searching 
 set smartcase " Unless it starts with a capital
+" Use ag instead of ack for searching
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
 
 " ==========
 " = Syntax =
@@ -59,7 +63,8 @@ inoremap <A-h> <C-\><C-N><C-w>h
 inoremap <A-k> <C-\><C-N><C-w>k
 inoremap <A-j> <C-\><C-N><C-w>j
 inoremap <A-l> <C-\><C-N><C-w>l
-nnoremap <A-h> <C-w>h
+" Alt + h doesn't work for some reason
+nnoremap <A-n> <C-w>h 
 nnoremap <A-k> <C-w>k
 nnoremap <A-j> <C-w>j
 nnoremap <A-l> <C-w>l
@@ -182,6 +187,8 @@ Plug 'sirver/ultisnips' " LaTeX snippets
 Plug 'junegunn/vim-peekaboo' " Buffer preview
 Plug 'arcticicestudio/nord-vim' " Nord colorscheme
 Plug 'easymotion/vim-easymotion' " Faster movement
+Plug 'mileszs/ack.vim' " Multiple file search
+Plug 'fidian/hexmode' " Hex files
 
 " ======================
 " = End of plugin list =
