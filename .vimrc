@@ -21,6 +21,7 @@ set incsearch " Incremental Search
 set ignorecase " Ignores case when searching 
 set smartcase " Unless it starts with a capital
 " Use ag instead of ack for searching
+let g:ackprg = 'ag --vimgrep --smart-case'
 cnoreabbrev aG Ack
 cnoreabbrev Ag Ack
 cnoreabbrev AG Ack
