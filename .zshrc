@@ -183,6 +183,9 @@ HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 # NOTE: must come after select-word-style.
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# Enables bracketed paste
+source ~/.zsh/paste
+
 #
 # Bindings
 #

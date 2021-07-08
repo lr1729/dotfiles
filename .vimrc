@@ -191,6 +191,7 @@ Plug 'arcticicestudio/nord-vim' " Nord colorscheme
 Plug 'easymotion/vim-easymotion' " Faster movement
 Plug 'mileszs/ack.vim' " Multiple file search
 Plug 'fidian/hexmode' " Hex files
+Plug 'ConradIrwin/vim-bracketed-paste' " Better paste indents
 
 " ======================
 " = End of plugin list =
