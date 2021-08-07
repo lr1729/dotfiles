@@ -40,3 +40,4 @@ alias ll='exa -la --color=always --group-directories-first --git'
 # (work at any position within the command line)
 #
 
+alias -g yd='youtube-dl'

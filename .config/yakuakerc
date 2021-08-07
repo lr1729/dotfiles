@@ -22,7 +22,7 @@ next-session=Shift+Right; Ctrl+Tab
 previous-session=Shift+Left; Ctrl+Shift+Tab
 
 [Window]
+DynamicTabTitles=true
 Height=65
 ShowSystrayIcon=false
-ShowTabBar=false
 Width=50

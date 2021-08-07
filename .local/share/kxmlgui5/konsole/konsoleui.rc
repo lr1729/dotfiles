@@ -70,7 +70,5 @@
   <Action name="last-used-tab-reverse" shortcut="Ctrl+PgUp"/>
   <Action name="next-tab" shortcut="Shift+Right; Ctrl+Tab"/>
   <Action name="previous-tab" shortcut="Shift+Left; Ctrl+Shift+Tab"/>
-  <Action name="split-view-left-right" shortcut="Ctrl+)"/>
-  <Action name="split-view-top-bottom" shortcut="Ctrl+("/>
  </ActionProperties>
 </gui>
