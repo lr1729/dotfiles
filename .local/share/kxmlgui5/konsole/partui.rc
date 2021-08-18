@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui name="konsolepart" version="13" translationDomain="konsole">
+<kpartgui version="13" translationDomain="konsole" name="konsolepart">
  <Menu name="session-popup-menu">
   <Action name="edit_copy_contextmenu"/>
   <Action name="edit_paste"/>
@@ -27,6 +27,6 @@
   <Action name="close-session"/>
  </Menu>
  <ActionProperties scheme="Default">
-  <Action name="close-session" shortcut=""/>
+  <Action shortcut="" name="close-session"/>
  </ActionProperties>
 </kpartgui>

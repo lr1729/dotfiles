@@ -18,8 +18,10 @@ eDP-1 Width 1366x768=700
 detailViewIconSize=16
 
 [Shortcuts]
-next-session=Shift+Right; Ctrl+Tab
-previous-session=Shift+Left; Ctrl+Shift+Tab
+next-session=Ctrl+Tab
+next-terminal=Shift+Right
+previous-session=Ctrl+Shift+Tab
+previous-terminal=Shift+Left
 
 [Window]
 DynamicTabTitles=true

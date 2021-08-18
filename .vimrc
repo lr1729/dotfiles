@@ -57,11 +57,11 @@ augroup END
 " ===========
 
 " Easier keybinds to move terminals
-tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-n> <C-\><C-N><C-w>h
 tnoremap <A-k> <C-\><C-N><C-w>k
 tnoremap <A-j> <C-\><C-N><C-w>j
 tnoremap <A-l> <C-\><C-N><C-w>l
-inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-n> <C-\><C-N><C-w>h
 inoremap <A-k> <C-\><C-N><C-w>k
 inoremap <A-j> <C-\><C-N><C-w>j
 inoremap <A-l> <C-\><C-N><C-w>l
@@ -101,18 +101,18 @@ autocmd FileType latex,tex,md,markdown setlocal spell
 set spelllang=en
 " Autocorrect
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
-" One key compile and run for c++
-autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+" One key compile
+autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR>
 " One key debug for c++
 packadd termdebug
-autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR> :Termdebug %:r<CR><C-\><C-n>:set filetype=gdb<CR><C-w>k<C-\><C-n>:q<CR>
+autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR> :Termdebug %:r<CR><C-\><C-n>:set filetype=gdb<CR><C-w>t<C-w>H
 " Debug shortcuts for c++
 autocmd FileType cpp nnoremap <F6> :Run<CR>
 autocmd FileType cpp nnoremap <F7> :Over<CR>
 autocmd FileType cpp nnoremap <F8> :Continue<CR>
 autocmd FileType cpp nnoremap <A-s> :Break<CR>
 autocmd FileType cpp nnoremap <A-c> :Clear<CR>
-autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>k:let sourcefile=expand('%:r') <CR>:w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').''<CR><C-\><C-n><C-w>jfile <C-\><C-n>:put =sourcefile<CR>i<CR>y<CR>y<CR>r<CR>y<CR>dv<CR>
+autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>t:let sourcefile=expand('%:r') <CR>:w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').''<CR><CR><C-w>l<C-\><C-n><C-w>jfile <C-\><C-n>:put =sourcefile<CR>i<CR>y<CR>y<CR>r<CR>y<CR>dv<CR>
 
 " ==============
 " = Appearance =
@@ -124,6 +124,7 @@ set termguicolors " True 24 bit colors for nvim
 " Flash yanked text
 au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Substitute", timeout=150, on_visual=false}
 " Disable line numbers in terminal
+let g:termdebug_wide=1 " Use side by side layout for termdebug
 au TermOpen * setlocal nonumber norelativenumber
 
 
