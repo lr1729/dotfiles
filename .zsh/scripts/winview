@@ -1,7 +1,7 @@
 #!/bin/bash
 
 /usr/bin/looking-glass-client -m 41 -p 5901 win:size=1280x720 win:minimizeOnFocusLoss=no "$@" > /dev/null 2>&1 & # Starts Looking Glass, and ignores all output, delete is the mouse capture key
-/usr/bin/scream -i virbr0 & # Starts Scream with pulse
+/usr/bin/scream -i virbr1 & # Starts Scream with pulse
 # OR
 
 wait -n # We wait for any of these processes to exit. (Like closing the Looking Glass window, in our case)

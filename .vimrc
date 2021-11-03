@@ -45,6 +45,9 @@ let g:tex_conceal='abdmg' " idk
 let g:UltiSnipsExpandTrigger = '<tab>' " Tab triggers Ultisnips
 let g:UltiSnipsJumpForwardTrigger = '<tab>' " Tab cycles snips
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>' "Shift-Tab cycles snips in reverse
+" Treat .h files as c++
+let g:ale_cpp_clangtidy_options = '-Wall -std=c++11 -x c++'
+let g:ale_cpp_clangcheck_options = '-- -Wall -std=c++11 -x c++'
 " Start a continuous compilation on file open
 augroup vimtex_config
   if filereadable(@%)
@@ -112,7 +115,10 @@ autocmd FileType cpp nnoremap <F7> :Over<CR>
 autocmd FileType cpp nnoremap <F8> :Continue<CR>
 autocmd FileType cpp nnoremap <A-s> :Break<CR>
 autocmd FileType cpp nnoremap <A-c> :Clear<CR>
-autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>t:let sourcefile=expand('%:r') <CR>:w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').''<CR><CR><C-w>l<C-\><C-n><C-w>jfile <C-\><C-n>:put =sourcefile<CR>i<CR>y<CR>y<CR>r<CR>y<CR>dv<CR>
+autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>t:let sourcefile=expand('%:r') <CR>:w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').''<CR><CR><C-w>bfile <C-\><C-n>:put =sourcefile<CR>i<CR>y<CR>y<CR>r<CR>y<CR>dv<CR>
+" Tab switching shortcuts
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
 
 " ==============
 " = Appearance =
@@ -195,6 +201,7 @@ Plug 'fidian/hexmode' " Hex files
 Plug 'ConradIrwin/vim-bracketed-paste' " Better paste indents
 Plug 'editorconfig/editorconfig-vim' " Configure project standards
 Plug 'tpope/vim-surround' " Better interaction with surrounds
+Plug 'tpope/copilot' " Better interaction with surrounds
 
 " ======================
 " = End of plugin list =

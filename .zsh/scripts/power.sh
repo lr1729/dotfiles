@@ -19,7 +19,7 @@ fi
 echo $STATE
 
 AC="ondemand"
-BAT="powersave"
+BAT="ondemand"
 if [[ $STATE == "BAT" ]]; then
   echo "Discharging, set governor to ${BAT}"
   cpupower frequency-set -g ${BAT}

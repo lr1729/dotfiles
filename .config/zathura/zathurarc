@@ -1,8 +1,8 @@
 set recolor "true"
-set default-bg rgba(47,52,64,0.80)
-set inputbar-bg rgba(47,52,64,0.90)
-set statusbar-bg rgba(47,52,64,0.90)
-set completion-bg rgba(47,52,64,0.90)
+set default-bg rgba(47,52,64,0.90)
+set inputbar-bg rgba(47,52,64,0.95)
+set statusbar-bg rgba(47,52,64,0.95)
+set completion-bg rgba(47,52,64,0.95)
 set index-bg rgba(47,52,64,0)
 set recolor-lightcolor rgba(0,0,0,0)
 set guioptions sv

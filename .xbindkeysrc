@@ -46,6 +46,9 @@
 "xte 'keydown Control_L' 'keydown Shift_L' 'key Tab' 'keyup Shift_L' 'keyup Control_L'"
   b:8
 
+#"/home/ling/btd.sh"
+#  g
+
 #"xterm -geom 50x20+20+20"
 #   Shift+Mod2+alt + s
 #
