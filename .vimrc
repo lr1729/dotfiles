@@ -201,7 +201,7 @@ Plug 'fidian/hexmode' " Hex files
 Plug 'ConradIrwin/vim-bracketed-paste' " Better paste indents
 Plug 'editorconfig/editorconfig-vim' " Configure project standards
 Plug 'tpope/vim-surround' " Better interaction with surrounds
-Plug 'tpope/copilot' " Better interaction with surrounds
+Plug 'github/copilot.vim' " Better interaction with surrounds
 
 " ======================
 " = End of plugin list =
