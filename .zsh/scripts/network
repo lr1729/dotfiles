@@ -1,0 +1,12 @@
+#!/bin/bash
+INT=2
+RXDIR=/sys/class/net/wlo1/statistics/rx_bytes
+TXDIR=/sys/class/net/wlo1/statistics/tx_bytes
+RXSTART=$(cat $RXDIR)
+TXSTART=$(cat $TXDIR)
+sleep $INT
+RXEND=$(cat $RXDIR)
+TXEND=$(cat $TXDIR)
+RXBPS="$(echo $((RXEND-RXSTART)) | awk '{printf "%.1f",$1/(INT*131072)}' INT=$INT)"
+TXBPS="$(echo $((TXEND-TXSTART)) | awk '{printf "%.1f",$1/(INT*131072)}' INT=$INT)"
+echo "↓$RXBPS, ↑$TXBPS Mib/s"
