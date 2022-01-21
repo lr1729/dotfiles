@@ -4,8 +4,6 @@
 alias cn='screen -r'
 alias cf='screen -x'
 alias sv='sudo -E nvim'
-alias vpc='sudo wg-quick up pi'
-alias vpd='sudo wg-quick down pi'
 alias mntpi='sudo mount.cifs //192.168.1.87/ling /mnt/pi -o uid=0,nofail,credentials=/home/ling/.smb,iocharset=utf8,noperm'
 alias backup='screen -S backup -dm bash  -c "~/.zsh/scripts/backup"'
 alias andstart='setsid emulator -avd Pixel_2_API_30'
@@ -27,7 +25,6 @@ alias gaa='git add --all'
 alias gc='git commit -m'
 alias gp='git push'
 alias rm='trash'
-alias umirror='curl -s "https://archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - | sudo dd of=/etc/pacman.d/mirrorlist'
 alias h=history
 alias diff='diff --color=auto'
 alias s=ssh

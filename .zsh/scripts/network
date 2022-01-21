@@ -9,4 +9,4 @@ RXEND=$(cat $RXDIR)
 TXEND=$(cat $TXDIR)
 RXBPS="$(echo $((RXEND-RXSTART)) | awk '{printf "%.1f",$1/(INT*131072)}' INT=$INT)"
 TXBPS="$(echo $((TXEND-TXSTART)) | awk '{printf "%.1f",$1/(INT*131072)}' INT=$INT)"
-echo "↓$RXBPS, ↑$TXBPS Mib/s"
+echo "↓$RXBPS ↑$TXBPS Mib/s"
