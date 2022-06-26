@@ -1,10 +1,9 @@
 export EDITOR=nvim
 export VISUAL=nvim
-export JAVA_HOME=~/wpilib/2021/jdk
 
 # Add Android SDK to path
 export ANDROID_SDK=$HOME/Android/Sdk
-export PATH="$ANDROID_SDK/emulator:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:~/.local/lib/python3.8/:$PATH"
+export PATH="$ANDROID_SDK/emulator:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:$PATH"
 
 # Add pip packages to path
 path+=$HOME/.local/bin
