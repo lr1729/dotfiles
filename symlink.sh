@@ -42,10 +42,3 @@ done
 
 # Special case for nvim
 ln -sfn "${DIR}/.vimrc" "${destPath}/.config/nvim/init.vim"
-
-mkdir -p ${destPath}/.local/share # Create a .local folder if it doesn't already exist
-
-# Symlink files in ~/.local/share
-for file in .local/share/*; do
-  ln -sfn ${DIR}/${file} ${destPath}/${file}
-done

@@ -49,6 +49,8 @@ let g:UltiSnipsJumpBackwardTrigger = '<s-tab>' "Shift-Tab cycles snips in revers
 let g:ale_cpp_clangtidy_options = '-Wall -std=c++11 -x c++'
 let g:ale_cpp_clangcheck_options = '-- -Wall -std=c++11 -x c++'
 au BufEnter * set fo-=c fo-=r fo-=o " Disable automatic comment continuation
+let g:copilot_node_command = "/usr/share/nvm/versions/node/v17.9.1/bin/node"
+
 " Start a continuous compilation on file open
 augroup vimtex_config
   if filereadable(@%)
