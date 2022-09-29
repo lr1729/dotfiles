@@ -27,32 +27,25 @@ $0
 \end{document}
 endsnippet
 
-
 snippet template "Basic template" b
-\documentclass[12pt]{article}
-\usepackage{extsizes}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsfonts}
-\usepackage{amsthm}
-\usepackage{mathrsfs}
-\usepackage[all]{xy}
-\usepackage{asymptote}
-\usepackage{graphicx}
-\usepackage{float}
-\restylefloat{table}
-\usepackage{verbatim}
-\usepackage[margin=1in]{geometry}
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[dutch]{babel}
+\usepackage{amsmath, amssymb}
+
 
 % figure support
 \usepackage{import}
+\usepackage{xifthen}
+\pdfminorversion=7
 \usepackage{pdfpages}
 \usepackage{transparent}
-\usepackage{xcolor}
-
-\newcommand{\incfig}[2][1]{%
-    \def\svgwidth{#1\columnwidth}
-    \import{./figures/}{#2.pdf_tex}
+\newcommand{\incfig}[1]{%
+	\def\svgwidth{\columnwidth}
+	\import{./figures/}{#1.pdf_tex}
 }
 
 \pdfsuppresswarningpagegroup=1
@@ -61,21 +54,21 @@ snippet template "Basic template" b
 \begin{flushright}
 	Lingfeng Ren\\\\
 	`date +%F` \\\\
-	Block $1
+	$1
 \end{flushright}
 
 \begin{center}
 \large $2
 \end{center}
 
-$0
+	$0
 \end{document}
 endsnippet
 
-priority 10
-context "math()"
-snippet vec "vector" iA
-\vec{$1}$0
+snippet beg "begin{} / end{}" bA
+\\begin{$1}
+	$0
+\\end{$1}
 endsnippet
 
 context "math()"
@@ -110,23 +103,6 @@ endsnippet
 context "not math()"
 snippet box "Box"
 $\boxed{$1}$
-endsnippet
-
-snippet tb "table row" iA
-$1 & $2 & $3 \\\\ \hline
-$0
-endsnippet
-
-snippet tab "table" 
-\begin{table}[H]
-\centering
-\begin{tabular}{|p{2cm}|p{1.5cm}|p{12cm}|}
-\hline
-$1 & $2 & $3 \\\\ \hline
-$4 & $5 & $6 \\\\ \hline
-$0
-\end{tabular}
-\end{table}
 endsnippet
 
 context "math()"
@@ -235,6 +211,66 @@ snippet item "Itemize" bA
 \end{itemize}
 endsnippet
 
+snippet eg "Example" b
+\begin{eg}
+	$0
+\end{eg}
+endsnippet
+
+snippet exp "Explanation" b
+\begin{explanation}
+	$0
+\end{explanation}
+endsnippet
+
+snippet theorem "Theorem" b
+\begin{theorem}[${1:label}]
+	$0
+\end{theorem}
+endsnippet
+
+snippet proof "Proof" b
+\begin{proof}
+	$0
+\end{proof}
+endsnippet
+
+snippet code "Code" b
+\begin{lstlisting}[language=${1:R}]
+	$0
+\end{lstlisting}
+endsnippet
+
+snippet remark "Remark" b
+\begin{remark}
+	$0
+\end{remark}
+endsnippet
+
+snippet def "Definition" b
+\begin{definition}
+	$0
+\end{definition}
+endsnippet
+
+snippet prop "Proposition" b
+\begin{proposition}
+	$0
+\end{proposition}
+endsnippet
+
+snippet lemma "Lemma" b
+\begin{lemma}
+	$0
+\end{lemma}
+endsnippet
+
+snippet corrolary "Corrolary" b
+\begin{corrolary}
+	$0
+\end{corrolary}
+endsnippet
+
 snippet desc "Description" b
 \begin{description}
 	\item[$1] $0
@@ -287,6 +323,25 @@ endsnippet
 
 snippet / "Fraction" i
 \\frac{${VISUAL}}{$1}$0
+endsnippet
+
+snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wrA
+\\frac{`!p snip.rv = match.group(1)`}{$1}$0
+endsnippet
+
+priority 1000
+snippet '^.*\)/' "() Fraction" wrA
+`!p
+stripped = match.string[:-1]
+depth = 0
+i = len(stripped) - 1
+while True:
+	if stripped[i] == ')': depth += 1
+	if stripped[i] == '(': depth -= 1
+	if depth == 0: break;
+	i -= 1
+snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
+`{$1}$0
 endsnippet
 
 snippet == "equals" iA
@@ -436,11 +491,6 @@ x_{m}
 endsnippet
 
 context "math()"
-snippet nabl "nabla" iA
-\nabla 
-endsnippet
-
-context "math()"
 snippet xx "cross" iA
 \times 
 endsnippet
@@ -462,10 +512,22 @@ snippet int "integral" wA
 \int $0
 endsnippet
 
+priority 100
+context "math()"
+snippet '(?<!\\)(sin|cos|arccot|cot|csc|ln|log|exp|star|perp)' "ln" rwA
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
 priority 300
 context "math()"
 snippet dint "integral" wA
 \int_{${1:}}^{${2:}} ${3:${VISUAL}} $0
+endsnippet
+
+priority 200
+context "math()"
+snippet '(?<!\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta|int)' "ln" rwA
+\\`!p snip.rv = match.group(1)`
 endsnippet
 
 priority 100

@@ -1,8 +1,6 @@
 function ftex(){
   killall inkscape-figures
-  mkdir "$1"
-  cd "$1"
-  mkdir figures
+  mkdir -p figures
   cd figures
   inkscape-figures watch
   cd ..

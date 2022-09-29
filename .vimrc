@@ -51,13 +51,6 @@ let g:ale_cpp_clangcheck_options = '-- -Wall -std=c++11 -x c++'
 au BufEnter * set fo-=c fo-=r fo-=o " Disable automatic comment continuation
 let g:copilot_node_command = "/usr/share/nvm/versions/node/v17.9.1/bin/node"
 
-" Start a continuous compilation on file open
-augroup vimtex_config
-  if filereadable(@%)
-    autocmd User VimtexEventInitPost VimtexCompile
-  endif
-augroup END
-
 " ===========
 " = KEYMAPS =
 " ===========
@@ -104,6 +97,9 @@ inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" 
 nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 " Enable spellcheck
 autocmd FileType latex,tex,md,markdown setlocal spell
+" Remap copliot for tex files
+autocmd FileType latex,tex imap <silent><script><expr> <C-J> copilot#Accept("")
+autocmd FileType latex,tex let g:copilot_no_tab_map = v:true
 set spelllang=en
 " Autocorrect
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u

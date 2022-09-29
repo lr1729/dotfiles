@@ -7,3 +7,4 @@ export PATH="$ANDROID_SDK/emulator:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tool
 
 # Add pip packages to path
 path+=$HOME/.local/bin
+[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
