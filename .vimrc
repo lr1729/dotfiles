@@ -96,7 +96,7 @@ inoremap <C-s> <C-o>:w<CR>
 inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 " Enable spellcheck
-autocmd FileType latex,tex,md,markdown setlocal spell
+autocmd FileType latex,tex,md,markdown,txt setlocal spell
 " Remap copliot for tex files
 autocmd FileType latex,tex imap <silent><script><expr> <C-J> copilot#Accept("")
 autocmd FileType latex,tex let g:copilot_no_tab_map = v:true

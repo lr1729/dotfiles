@@ -28,14 +28,12 @@ $0
 endsnippet
 
 snippet template "Basic template" b
-\documentclass[a4paper]{article}
+\documentclass[12pt]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
-\usepackage[dutch]{babel}
 \usepackage{amsmath, amssymb}
-
 
 % figure support
 \usepackage{import}
@@ -389,7 +387,7 @@ snippet conj "conjugate" iA
 endsnippet
 
 snippet sum "sum" w
-\sum_{n=${1:1}}^{${2:\infty}} ${3:a_n z^n}
+\sum_{k=${1:1}}^{${2:\infty}} ${3:a_n z^n}
 endsnippet
 
 snippet taylor "taylor" w
