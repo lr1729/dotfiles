@@ -5,5 +5,5 @@ set statusbar-bg rgba(22,25,37,0.90)
 set completion-bg rgba(22,25,37,0.90)
 set index-bg rgba(22,35,37,0)
 set recolor-lightcolor rgba(0,0,0,0)
-set guioptions none
+set guioptions s
 set selection-clipboard clipboard

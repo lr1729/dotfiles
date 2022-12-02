@@ -34,6 +34,7 @@ snippet template "Basic template" b
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
 \usepackage{amsmath, amssymb}
+\usepackage[shortlabels]{enumitem}
 
 % figure support
 \usepackage{import}
@@ -101,6 +102,17 @@ endsnippet
 context "not math()"
 snippet box "Box"
 $\boxed{$1}$
+endsnippet
+
+context "not math()"
+snippet itn "Item"
+\item [$1]
+$0
+endsnippet
+
+context "not math()"
+snippet it "Item"
+\item $1
 endsnippet
 
 context "math()"
@@ -304,7 +316,7 @@ endsnippet
 snippet dm "Math" wA
 \[
 ${1:${VISUAL}}
-\] $0
+\]$0
 endsnippet
 
 snippet ali "Align" bA
@@ -313,6 +325,11 @@ snippet ali "Align" bA
 \end{align*}
 endsnippet
 
+snippet gat "Gather" bA
+\begin{gather*}
+	${1:${VISUAL}}
+\end{gather*}
+endsnippet
 
 context "math()"
 snippet // "Fraction" iA
@@ -404,7 +421,7 @@ endsnippet
 
 context "math()"
 snippet sq "\sqrt{}" iA
-\sqrt{${1:${VISUAL}}} $0
+\sqrt{${1:${VISUAL}}}$0
 endsnippet
 
 context "math()"
@@ -564,7 +581,7 @@ snippet set "set" wA
 endsnippet
 
 snippet | "mid" i
- \mid 
+ \bigg |
 endsnippet
 
 context "math()"

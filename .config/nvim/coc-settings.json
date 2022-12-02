@@ -1,4 +1,6 @@
 {
   "javascript.suggestionActions.enabled": false,
-  "diagnostic.displayByAle": true
+  "diagnostic.displayByAle": true,
+  "suggest.enablePreselect": false,
+  "suggest.noselect": true
 }

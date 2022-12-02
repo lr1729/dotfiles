@@ -36,7 +36,6 @@ filetype on " Automatic file type detection
 set conceallevel=1 " Hides unneeded syntax
 set omnifunc=ale#completion#OmniFunc " Let ALE handle omnicompletion
 let g:ale_disable_lsp = 1 " Let Coc handle lsp
-let g:SuperTabDefaultCompletionType = "<c-x><c-o>" " Use full completion by default
 let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
 let g:tex_flavor='latex' " Set default filetype to LaTeX
 let g:vimtex_view_method='zathura' " Use zathura as the viewer
@@ -50,6 +49,17 @@ let g:ale_cpp_clangtidy_options = '-Wall -std=c++11 -x c++'
 let g:ale_cpp_clangcheck_options = '-- -Wall -std=c++11 -x c++'
 au BufEnter * set fo-=c fo-=r fo-=o " Disable automatic comment continuation
 let g:copilot_node_command = "/usr/share/nvm/versions/node/v17.9.1/bin/node"
+
+" use <tab> for trigger completion and navigate to the next complete item
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
 
 " ===========
 " = KEYMAPS =
@@ -96,12 +106,12 @@ inoremap <C-s> <C-o>:w<CR>
 inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
 nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 " Enable spellcheck
-autocmd FileType latex,tex,md,markdown,txt setlocal spell
+autocmd FileType latex,tex,md,markdown,text setlocal spell
 " Remap copliot for tex files
 autocmd FileType latex,tex imap <silent><script><expr> <C-J> copilot#Accept("")
 autocmd FileType latex,tex let g:copilot_no_tab_map = v:true
 set spelllang=en
-" Autocorrect
+" Autocorrect with control l
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 " One key compile
 autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR>
@@ -118,6 +128,18 @@ autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>t:let sourcefile=expand('%:r')
 " Tab switching shortcuts
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
+
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
+
+" Disable copilot for certain filetypes
+let g:copilot_filetypes = {
+  \ 'tex' : v:false,
+  \ 'text' : v:false,
+  \ '*' : v:false,
+\}
 
 " ==============
 " = Appearance =
@@ -138,7 +160,8 @@ au TermOpen * setlocal nonumber norelativenumber
 " =========
 
 " set mouse=a " Can use mouse for yanking
-set splitbelow " Opens new buffers below
+set mouse= " Disable mouse popup menu in nvim
+set splitbelow " Opens new buffers below5341704
 set splitright " Opens new buffers to the right
 set nojoinspaces " Something about joining lines and spaces
 set whichwrap+=<,>,h,l,[,] " Wrap lines with arrow keys and hl
@@ -164,6 +187,7 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile vimrc.local set filetype=vim
 augroup END
 autocmd FileType tex let b:coc_suggest_disable = 1
+
 " Check for file updates every second
 if ! exists("g:CheckUpdateStarted")
 let g:CheckUpdateStarted=1
@@ -175,6 +199,12 @@ silent! checktime
 endfunction
 " Loads buffer script
 source ~/.vim/scripts/bclose.vim
+
+let g:vimspector_enable_mappings = 'HUMAN'
+
+let g:python_recommended_style = 0 " Use two spaces for tabs in python
+filetype plugin indent on
+syntax on
 
 " Start loading plugins
 call plug#begin()
@@ -188,10 +218,8 @@ Plug 'inside/vim-search-pulse' " Pulses search results
 Plug 'vim-airline/vim-airline' " Provides Airline bar
 Plug 'dense-analysis/ale' " Provides linting
 Plug 'junegunn/fzf.vim' " Providez fuzzy file finding
-Plug 'ervandew/supertab' " Intelligent tab autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'lervag/vimtex' " LaTeX utils
-Plug 'sirver/ultisnips' " LaTeX snippets
 Plug 'junegunn/vim-peekaboo' " Buffer preview
 Plug 'arcticicestudio/nord-vim' " Nord colorscheme
 Plug 'easymotion/vim-easymotion' " Faster movement
@@ -201,6 +229,8 @@ Plug 'ConradIrwin/vim-bracketed-paste' " Better paste indents
 Plug 'editorconfig/editorconfig-vim' " Configure project standards
 Plug 'tpope/vim-surround' " Better interaction with surrounds
 Plug 'github/copilot.vim' " Better interaction with surrounds
+Plug 'puremourning/vimspector' " Better interaction with surrounds
+Plug 'tpope/vim-commentary' " Comment faster
 
 " ======================
 " = End of plugin list =
