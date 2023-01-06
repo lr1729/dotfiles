@@ -32,6 +32,7 @@ alias v=nvim
 alias ls='exa --color=always --group-directories-first'
 alias l='ls'
 alias ll='exa -la --color=always --group-directories-first --git'
+alias umirrir='sudo reflector --country US --verbose -l 200 -n 20 -p http --sort rate --save /etc/pacman.d/mirrorlist'
 
 #
 # Global aliases

@@ -41,9 +41,6 @@ let g:tex_flavor='latex' " Set default filetype to LaTeX
 let g:vimtex_view_method='zathura' " Use zathura as the viewer
 let g:vimtex_quickfix_mode=0 " Allows quickfixes
 let g:tex_conceal='abdmg' " idk
-let g:UltiSnipsExpandTrigger = '<tab>' " Tab triggers Ultisnips
-let g:UltiSnipsJumpForwardTrigger = '<tab>' " Tab cycles snips
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>' "Shift-Tab cycles snips in reverse
 " Treat .h files as c++
 let g:ale_cpp_clangtidy_options = '-Wall -std=c++11 -x c++'
 let g:ale_cpp_clangcheck_options = '-- -Wall -std=c++11 -x c++'
@@ -60,6 +57,11 @@ inoremap <silent><expr> <Tab>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
+
+" Is actually mapped to shift/control space by xkeysnail due to konsole limitation
+let g:UltiSnipsExpandTrigger = '<M-C-A>' " Tab triggers Ultisnips
+let g:UltiSnipsJumpForwardTrigger = '<M-C-A>' " Tab cycles snips
+let g:UltiSnipsJumpBackwardTrigger = '<M-C-B>' "Shift-Tab cycles snips in reverse
 
 " ===========
 " = KEYMAPS =
@@ -114,7 +116,7 @@ set spelllang=en
 " Autocorrect with control l
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 " One key compile
-autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR>
+autocmd filetype " cpp nnoremap <F4> :w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR>
 " One key debug for c++
 packadd termdebug
 autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR> :Termdebug %:r<CR><C-\><C-n>:set filetype=gdb<CR><C-w>t<C-w>H
@@ -125,6 +127,7 @@ autocmd FileType cpp nnoremap <F8> :Continue<CR>
 autocmd FileType cpp nnoremap <A-s> :Break<CR>
 autocmd FileType cpp nnoremap <A-c> :Clear<CR>
 autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>t:let sourcefile=expand('%:r') <CR>:w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').''<CR><CR><C-w>bfile <C-\><C-n>:put =sourcefile<CR>i<CR>y<CR>y<CR>r<CR>y<CR>dv<CR>
+autocmd filetype rust nnoremap <F4> :w <bar> exec '!rustc -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR>
 " Tab switching shortcuts
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
@@ -138,8 +141,9 @@ xmap <Leader>di <Plug>VimspectorBalloonEval
 let g:copilot_filetypes = {
   \ 'tex' : v:false,
   \ 'text' : v:false,
-  \ '*' : v:false,
 \}
+
+let g:copilot_enabled = v:false
 
 " ==============
 " = Appearance =
@@ -200,11 +204,13 @@ endfunction
 " Loads buffer script
 source ~/.vim/scripts/bclose.vim
 
-let g:vimspector_enable_mappings = 'HUMAN'
+" let g:vimspector_enable_mappings = 'HUMAN'
 
 let g:python_recommended_style = 0 " Use two spaces for tabs in python
 filetype plugin indent on
 syntax on
+
+let g:ale_rust_rls_toolchain = 'stable'
 
 " Start loading plugins
 call plug#begin()
@@ -231,6 +237,8 @@ Plug 'tpope/vim-surround' " Better interaction with surrounds
 Plug 'github/copilot.vim' " Better interaction with surrounds
 Plug 'puremourning/vimspector' " Better interaction with surrounds
 Plug 'tpope/vim-commentary' " Comment faster
+Plug 'sirver/ultisnips' " LaTeX snippets
+Plug 'rust-lang/rust.vim' " Better rust support
 
 " ======================
 " = End of plugin list =
