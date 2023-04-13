@@ -77,7 +77,7 @@ inoremap <A-k> <C-\><C-N><C-w>k
 inoremap <A-j> <C-\><C-N><C-w>j
 inoremap <A-l> <C-\><C-N><C-w>l
 " Alt + h doesn't work for some reason
-nnoremap <A-n> <C-w>h 
+nnoremap <A-h> <C-w>h 
 nnoremap <A-k> <C-w>k
 nnoremap <A-j> <C-w>j
 nnoremap <A-l> <C-w>l
@@ -116,7 +116,7 @@ set spelllang=en
 " Autocorrect with control l
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 " One key compile
-autocmd filetype " cpp nnoremap <F4> :w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR>
+autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR>
 " One key debug for c++
 packadd termdebug
 autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR> :Termdebug %:r<CR><C-\><C-n>:set filetype=gdb<CR><C-w>t<C-w>H
@@ -131,11 +131,6 @@ autocmd filetype rust nnoremap <F4> :w <bar> exec '!rustc -g '.shellescape('%').
 " Tab switching shortcuts
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
-
-" for normal mode - the word under the cursor
-nmap <Leader>di <Plug>VimspectorBalloonEval
-" for visual mode, the visually selected text
-xmap <Leader>di <Plug>VimspectorBalloonEval
 
 " Disable copilot for certain filetypes
 let g:copilot_filetypes = {
@@ -156,6 +151,7 @@ set termguicolors " True 24 bit colors for nvim
 au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Substitute", timeout=150, on_visual=false}
 " Disable line numbers in terminal
 let g:termdebug_wide=1 " Use side by side layout for termdebug
+set lbr
 au TermOpen * setlocal nonumber norelativenumber
 
 
@@ -204,8 +200,6 @@ endfunction
 " Loads buffer script
 source ~/.vim/scripts/bclose.vim
 
-" let g:vimspector_enable_mappings = 'HUMAN'
-
 let g:python_recommended_style = 0 " Use two spaces for tabs in python
 filetype plugin indent on
 syntax on
@@ -235,7 +229,6 @@ Plug 'ConradIrwin/vim-bracketed-paste' " Better paste indents
 Plug 'editorconfig/editorconfig-vim' " Configure project standards
 Plug 'tpope/vim-surround' " Better interaction with surrounds
 Plug 'github/copilot.vim' " Better interaction with surrounds
-Plug 'puremourning/vimspector' " Better interaction with surrounds
 Plug 'tpope/vim-commentary' " Comment faster
 Plug 'sirver/ultisnips' " LaTeX snippets
 Plug 'rust-lang/rust.vim' " Better rust support
