@@ -76,7 +76,6 @@ inoremap <A-n> <C-\><C-N><C-w>h
 inoremap <A-k> <C-\><C-N><C-w>k
 inoremap <A-j> <C-\><C-N><C-w>j
 inoremap <A-l> <C-\><C-N><C-w>l
-" Alt + h doesn't work for some reason
 nnoremap <A-h> <C-w>h 
 nnoremap <A-k> <C-w>k
 nnoremap <A-j> <C-w>j
