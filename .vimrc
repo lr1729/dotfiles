@@ -14,7 +14,7 @@ set expandtab " Expand tabs to spaces
 " = Searching =
 " =============
 
-set number relativenumber " Relative line numbers are nice
+set number " Relative line numbers are nice
 set numberwidth=4 " Increases line number margins
 set hlsearch " Highlight searches
 set incsearch " Incremental Search
@@ -53,26 +53,25 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-inoremap <silent><expr> <Tab>
+  inoremap <silent><expr> <M-C-A>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
 
-" Is actually mapped to shift/control space by xkeysnail due to konsole limitation
-let g:UltiSnipsExpandTrigger = '<M-C-A>' " Tab triggers Ultisnips
-let g:UltiSnipsJumpForwardTrigger = '<M-C-A>' " Tab cycles snips
-let g:UltiSnipsJumpBackwardTrigger = '<M-C-B>' "Shift-Tab cycles snips in reverse
+let g:UltiSnipsExpandTrigger = '<tab>' " Tab triggers Ultisnips
+let g:UltiSnipsJumpForwardTrigger = '<tab>' " Tab cycles snips
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>' "Shift-Tab cycles snips in reverse
 
 " ===========
 " = KEYMAPS =
 " ===========
 
 " Easier keybinds to move terminals
-tnoremap <A-n> <C-\><C-N><C-w>h
+tnoremap <A-h> <C-\><C-N><C-w>h
 tnoremap <A-k> <C-\><C-N><C-w>k
 tnoremap <A-j> <C-\><C-N><C-w>j
 tnoremap <A-l> <C-\><C-N><C-w>l
-inoremap <A-n> <C-\><C-N><C-w>h
+inoremap <A-h> <C-\><C-N><C-w>h
 inoremap <A-k> <C-\><C-N><C-w>k
 inoremap <A-j> <C-\><C-N><C-w>j
 inoremap <A-l> <C-\><C-N><C-w>l
@@ -118,14 +117,30 @@ inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR>
 " One key debug for c++
 packadd termdebug
-autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR> :Termdebug %:r<CR><C-\><C-n>:set filetype=gdb<CR><C-w>t<C-w>H
+autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ -Wall -Werror -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR> :Termdebug %:r<CR><C-\><C-n>:set filetype=gdb<CR><C-w>t<C-w>H
+
+" One key compile
+autocmd filetype c nnoremap <F4> :w <bar> exec '!make' <CR>
+" One key debug for c++
+autocmd filetype c nnoremap <F5> :w <bar> exec '!make' <CR> :Termdebug %:r<CR><C-\><C-n>:set filetype=gdb<CR><C-w>t<C-w>H
+
+" One key compile for assembly
+autocmd filetype asm nnoremap <F4> :w <bar> exec '!as --gstabs --32 -o '.shellescape('%:r').'.o '.shellescape('%').'' <CR>
+
+" One key debug for assembly
+autocmd filetype asm nnoremap <F5> :w <bar> exec '!as --gstabs --32 -o '.shellescape('%:r').'.o '.shellescape('%').'' <CR> :exec '!ld -m elf_i386 -o '.shellescape('%:r').'.out '.shellescape('%:r').'.o' <CR> :Termdebug %:r.out<CR><C-\><C-n>:set filetype=gdb<CR><C-w>t<C-w>H
+
 " Debug shortcuts for c++
 autocmd FileType cpp nnoremap <F6> :Run<CR>
 autocmd FileType cpp nnoremap <F7> :Over<CR>
 autocmd FileType cpp nnoremap <F8> :Continue<CR>
 autocmd FileType cpp nnoremap <A-s> :Break<CR>
 autocmd FileType cpp nnoremap <A-c> :Clear<CR>
-autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>t:let sourcefile=expand('%:r') <CR>:w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').''<CR><CR><C-w>bfile <C-\><C-n>:put =sourcefile<CR>i<CR>y<CR>y<CR>r<CR>y<CR>dv<CR>
+" autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>t:let sourcefile=expand('%:r') <CR>:w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').''<CR><CR><C-w>bfile <C-\><C-n>:put =sourcefile<CR>i<CR>y<CR>y<CR>r<CR>y<CR>dv<CR>
+
+autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>t:let sourcefile=expand('%:r') <CR>:w <bar> exec '!make'<CR><CR><C-w>b<C-\><C-n>:put ='file '.sourcefile.'.out'<CR>i<CR>y<CR>
+
+
 autocmd filetype rust nnoremap <F4> :w <bar> exec '!rustc -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR>
 " Tab switching shortcuts
 nnoremap <C-Left> :tabprevious<CR>

@@ -1,3 +1,5 @@
+set debuginfod enabled on
+
 define sv
   set $vars = $arg0
   dv
