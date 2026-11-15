@@ -21,7 +21,7 @@ set incsearch " Incremental Search
 set ignorecase " Ignores case when searching 
 set smartcase " Unless it starts with a capital
 " Use ag instead of ack for searching
-let g:ackprg = 'ag --vimgrep --smart-case'
+let g:ackprg = 'rg --vimgrep --smart-case'
 cnoreabbrev ag Ack
 cnoreabbrev aG Ack
 cnoreabbrev Ag Ack
@@ -37,6 +37,20 @@ set conceallevel=1 " Hides unneeded syntax
 set omnifunc=ale#completion#OmniFunc " Let ALE handle omnicompletion
 let g:ale_disable_lsp = 1 " Let Coc handle lsp
 let g:airline#extensions#ale#enabled = 1 " Integrate ALE linting with airline
+" Set linters and fixers
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'typescript': ['eslint'],
+\}
+
+let g:ale_fixers = {
+\   'javascript': ['eslint', 'prettier'],
+\   'typescript': ['eslint', 'prettier'],
+\}
+
+" Run fixers on save
+let g:ale_fix_on_save = 1
+
 let g:tex_flavor='latex' " Set default filetype to LaTeX
 let g:vimtex_view_method='zathura' " Use zathura as the viewer
 let g:vimtex_quickfix_mode=0 " Allows quickfixes
@@ -44,8 +58,7 @@ let g:tex_conceal='abdmg' " idk
 " Treat .h files as c++
 let g:ale_cpp_clangtidy_options = '-Wall -std=c++11 -x c++'
 let g:ale_cpp_clangcheck_options = '-- -Wall -std=c++11 -x c++'
-au BufEnter * set fo-=c fo-=r fo-=o " Disable automatic comment continuation
-let g:copilot_node_command = "/usr/share/nvm/versions/node/v17.9.1/bin/node"
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable automatic comment continuation
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! CheckBackspace() abort
@@ -53,14 +66,11 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-  inoremap <silent><expr> <M-C-A>
+  inoremap <silent><expr> <Tab>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
 
-let g:UltiSnipsExpandTrigger = '<tab>' " Tab triggers Ultisnips
-let g:UltiSnipsJumpForwardTrigger = '<tab>' " Tab cycles snips
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>' "Shift-Tab cycles snips in reverse
 
 " ===========
 " = KEYMAPS =
@@ -108,40 +118,40 @@ nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/
 " Enable spellcheck
 autocmd FileType latex,tex,md,markdown,text setlocal spell
 " Remap copliot for tex files
-autocmd FileType latex,tex imap <silent><script><expr> <C-J> copilot#Accept("")
-autocmd FileType latex,tex let g:copilot_no_tab_map = v:true
+autocmd FileType latex,tex inoremap <buffer> <silent><script><expr> <C-J> copilot#Accept("")
+let g:copilot_no_tab_map = v:true
 set spelllang=en
 " Autocorrect with control l
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 " One key compile
-autocmd filetype cpp nnoremap <F4> :w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR>
+autocmd filetype cpp nnoremap <buffer> <F4> :w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR>
 " One key debug for c++
-packadd termdebug
-autocmd filetype cpp nnoremap <F5> :w <bar> exec '!g++ -Wall -Werror -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR> :Termdebug %:r<CR><C-\><C-n>:set filetype=gdb<CR><C-w>t<C-w>H
+" Termdebug is loaded on first debug launch, not during every editor startup.
+autocmd filetype cpp nnoremap <buffer> <F5> :w <bar> exec '!g++ -Wall -Werror -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR> :packadd termdebug<CR>:Termdebug %:r<CR><C-\><C-n>:set filetype=gdb<CR><C-w>t<C-w>H
 
 " One key compile
-autocmd filetype c nnoremap <F4> :w <bar> exec '!make' <CR>
+autocmd filetype c nnoremap <buffer> <F4> :w <bar> exec '!make' <CR>
 " One key debug for c++
-autocmd filetype c nnoremap <F5> :w <bar> exec '!make' <CR> :Termdebug %:r<CR><C-\><C-n>:set filetype=gdb<CR><C-w>t<C-w>H
+autocmd filetype c nnoremap <buffer> <F5> :w <bar> exec '!make' <CR> :packadd termdebug<CR>:Termdebug %:r<CR><C-\><C-n>:set filetype=gdb<CR><C-w>t<C-w>H
 
 " One key compile for assembly
-autocmd filetype asm nnoremap <F4> :w <bar> exec '!as --gstabs --32 -o '.shellescape('%:r').'.o '.shellescape('%').'' <CR>
+autocmd filetype asm nnoremap <buffer> <F4> :w <bar> exec '!as --gstabs --32 -o '.shellescape('%:r').'.o '.shellescape('%').'' <CR>
 
 " One key debug for assembly
-autocmd filetype asm nnoremap <F5> :w <bar> exec '!as --gstabs --32 -o '.shellescape('%:r').'.o '.shellescape('%').'' <CR> :exec '!ld -m elf_i386 -o '.shellescape('%:r').'.out '.shellescape('%:r').'.o' <CR> :Termdebug %:r.out<CR><C-\><C-n>:set filetype=gdb<CR><C-w>t<C-w>H
+autocmd filetype asm nnoremap <buffer> <F5> :w <bar> exec '!as --gstabs --32 -o '.shellescape('%:r').'.o '.shellescape('%').'' <CR> :exec '!ld -m elf_i386 -o '.shellescape('%:r').'.out '.shellescape('%:r').'.o' <CR> :packadd termdebug<CR>:Termdebug %:r.out<CR><C-\><C-n>:set filetype=gdb<CR><C-w>t<C-w>H
 
 " Debug shortcuts for c++
-autocmd FileType cpp nnoremap <F6> :Run<CR>
-autocmd FileType cpp nnoremap <F7> :Over<CR>
-autocmd FileType cpp nnoremap <F8> :Continue<CR>
-autocmd FileType cpp nnoremap <A-s> :Break<CR>
-autocmd FileType cpp nnoremap <A-c> :Clear<CR>
-" autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>t:let sourcefile=expand('%:r') <CR>:w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').''<CR><CR><C-w>bfile <C-\><C-n>:put =sourcefile<CR>i<CR>y<CR>y<CR>r<CR>y<CR>dv<CR>
+autocmd FileType cpp nnoremap <buffer> <F6> :Run<CR>
+autocmd FileType cpp nnoremap <buffer> <F7> :Over<CR>
+autocmd FileType cpp nnoremap <buffer> <F8> :Continue<CR>
+autocmd FileType cpp nnoremap <buffer> <A-s> :Break<CR>
+autocmd FileType cpp nnoremap <buffer> <A-c> :Clear<CR>
+" autocmd FileType gdb tnoremap <buffer> <F9> <C-\><C-n><C-w>t:let sourcefile=expand('%:r') <CR>:w <bar> exec '!g++ -Wall -g '.shellescape('%').' -o '.shellescape('%:r').''<CR><CR><C-w>bfile <C-\><C-n>:put =sourcefile<CR>i<CR>y<CR>y<CR>r<CR>y<CR>dv<CR>
 
-autocmd FileType gdb tnoremap <F9> <C-\><C-n><C-w>t:let sourcefile=expand('%:r') <CR>:w <bar> exec '!make'<CR><CR><C-w>b<C-\><C-n>:put ='file '.sourcefile.'.out'<CR>i<CR>y<CR>
+autocmd FileType gdb tnoremap <buffer> <F9> <C-\><C-n><C-w>t:let sourcefile=expand('%:r') <CR>:w <bar> exec '!make'<CR><CR><C-w>b<C-\><C-n>:put ='file '.sourcefile.'.out'<CR>i<CR>y<CR>
 
 
-autocmd filetype rust nnoremap <F4> :w <bar> exec '!rustc -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR>
+autocmd filetype rust nnoremap <buffer> <F4> :w <bar> exec '!rustc -g '.shellescape('%').' -o '.shellescape('%:r').'' <CR>
 " Tab switching shortcuts
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
@@ -184,7 +194,7 @@ set title " Sets title of terminal
 set hidden " When opening a new buffer it hides old one
 autocmd TermOpen * startinsert " Automatically enter insert mode when entering a terminal window in nvim
 autocmd VimResized * wincmd = " Automatically resizes buffers on main window resize
-autocmd BufEnter,BufEnter term://* startinsert " Same as above but it actually works
+autocmd BufEnter term://* startinsert " Same as above but it actually works
 " When editing a file, always jump to the last known cursor position.
 augroup vimrcEx
   autocmd!
@@ -202,23 +212,17 @@ augroup vimrcEx
 augroup END
 autocmd FileType tex let b:coc_suggest_disable = 1
 
-" Check for file updates every second
-if ! exists("g:CheckUpdateStarted")
-let g:CheckUpdateStarted=1
-  call timer_start(1,'CheckUpdate')
-endif
-function! CheckUpdate(timer)
-silent! checktime
-  call timer_start(1000,'CheckUpdate')
-endfunction
+" Pick up external changes on focus, buffer switches, and idle; no perpetual timer.
+augroup dotfiles_checktime
+  autocmd!
+  autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * silent! checktime
+augroup END
 " Loads buffer script
 source ~/.vim/scripts/bclose.vim
 
 let g:python_recommended_style = 0 " Use two spaces for tabs in python
 filetype plugin indent on
 syntax on
-
-let g:ale_rust_rls_toolchain = 'stable'
 
 " Start loading plugins
 call plug#begin()
@@ -238,13 +242,9 @@ Plug 'junegunn/vim-peekaboo' " Buffer preview
 Plug 'arcticicestudio/nord-vim' " Nord colorscheme
 Plug 'easymotion/vim-easymotion' " Faster movement
 Plug 'mileszs/ack.vim' " Multiple file search
-Plug 'fidian/hexmode' " Hex files
-Plug 'ConradIrwin/vim-bracketed-paste' " Better paste indents
-Plug 'editorconfig/editorconfig-vim' " Configure project standards
 Plug 'tpope/vim-surround' " Better interaction with surrounds
 Plug 'github/copilot.vim' " Better interaction with surrounds
 Plug 'tpope/vim-commentary' " Comment faster
-Plug 'sirver/ultisnips' " LaTeX snippets
 Plug 'rust-lang/rust.vim' " Better rust support
 
 " ======================
@@ -262,3 +262,10 @@ colorscheme nord " Apply nord color scheme
 hi! Normal ctermbg=NONE guibg=NONE
 " Fix colors for concealed text
 hi clear Conceal
+
+augroup dotfiles_text
+  autocmd!
+  autocmd FileType text setlocal wrap linebreak nolist
+  autocmd FileType text nnoremap <buffer> j gj
+  autocmd FileType text nnoremap <buffer> k gk
+augroup END

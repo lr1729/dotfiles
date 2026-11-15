@@ -1,18 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# A simple script to display wifi name
-# 'ssid -i' = with icon, 'ssid' = text only
-# Cheers!
-# Addy
+# Display the connected Wi-Fi SSID; fall back to NetworkManager when iwgetid is absent.
+ssid=''
+if command -v iwgetid >/dev/null 2>&1; then
+  ssid="$(iwgetid -r 2>/dev/null || :)"
+fi
+if [[ -z "$ssid" ]] && command -v nmcli >/dev/null 2>&1; then
+  ssid="$(nmcli -t -f IN-USE,SSID device wifi list --rescan no 2>/dev/null | sed -n 's/^\*://p' | head -n 1)"
+fi
 
-SSID_NAME=$(/sbin/iwgetid -r)
-
-if [[ "${SSID_NAME}" != "" ]]; then
-	if  [[ $1 = "-i" ]]; then
-    echo "  ${SSID_NAME}"
-	else
-    echo "${SSID_NAME}"
-	fi
+if [[ -z "$ssid" ]]; then
+  printf 'Not Connected\n'
+elif [[ "${1:-}" == '-i' ]]; then
+  printf '  %s\n' "$ssid"
 else
-echo "Not Connected"
+  printf '%s\n' "$ssid"
 fi

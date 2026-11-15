@@ -1,2 +1,3 @@
-.config/nvim/init.vim
 .zsh/scripts/backup
+.config/nvim/plugged/
+.config/conky/.openweather-api-key

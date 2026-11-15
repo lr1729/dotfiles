@@ -1,3 +1,8 @@
+# Keep user-installed executables available without duplicate PATH entries.
+typeset -U path PATH
+[[ -d "$HOME/.local/bin" ]] && path=("$HOME/.local/bin" $path)
+[[ -d "$HOME/.opencode/bin" ]] && path=("$HOME/.opencode/bin" $path)
+
 #
 # Global
 #
@@ -15,7 +20,7 @@ __ital[ITALIC_OFF]=$'\e[23m'
 fpath=($HOME/.zsh/completions $fpath)
 
 autoload -U compinit
-compinit -u
+compinit
 
 # Make completion:
 # - Try exact (case-sensitive) match first.
@@ -163,11 +168,11 @@ setopt SHARE_HISTORY           # share history across shells
 autoload -U select-word-style
 select-word-style bash # only alphanumeric chars are considered WORDCHARS
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=59'
 
 # NOTE: must come after select-word-style.
-source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+source "$HOME/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
 # Note that this will only ensure unique history if we supply a prefix
 # before hitting "up" (ie. we perform a "search"). HIST_FIND_NO_DUPS
@@ -181,10 +186,10 @@ HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
 # Uncomment this to get syntax highlighting:
 # NOTE: must come after select-word-style.
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # Enables bracketed paste
-source ~/.zsh/paste
+source "$HOME/.zsh/paste"
 
 #
 # Bindings
@@ -230,9 +235,9 @@ bindkey '^Z' fg-bg
 # Other
 #
 
-source $HOME/.zsh/aliases
-source $HOME/.zsh/functions
-source $HOME/.zsh/exports
+source "$HOME/.zsh/aliases"
+source "$HOME/.zsh/functions"
+source "$HOME/.zsh/exports"
 
 #
 # Third-party
@@ -241,7 +246,7 @@ source $HOME/.zsh/exports
 # Skim
 
 # test -e "$HOME/.zsh/skim/shell/key-bindings.zsh" && source "$HOME/.zsh/skim/shell/key-bindings.zsh"
-test -e "$HOME/.zsh/skim/shell/completion.zsh" && source "$HOME/.zsh/skim/shell/completion.zsh"
+(( $+commands[sk] )) && [[ -r "$HOME/.zsh/skim/shell/completion.zsh" ]] && source "$HOME/.zsh/skim/shell/completion.zsh"
 
 #
 # Hooks

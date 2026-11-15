@@ -1,44 +1,34 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Link this repository into a home directory without overwriting user files.
+set -euo pipefail
 
-# Sets the destination path, user's home by default
-if [ "$1" ]
-then
-  destPath=$1
-else
-  destPath="$HOME"
-fi
+repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+dest_dir="${1:-$HOME}"
+mkdir -p "$dest_dir/.config"
 
-# Exclude .config folder to be symliked seperately and ignore other files
-exclude=(".config" ".git" ".gitignore" "symlink.sh" ".local")
-
-# Match hidden files with globbing
-shopt -s dotglob
-
-# Shows where dotfiles are to be symliked to
-echo Dotfiles installed to "${destPath}"
-
-# The directory the folder is in
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )" 
-
-# Symlink files in home directory
-for file in *; do
-  excluded=false
-  for (( index = 0; index < ${#exclude[@]}; index++ )); do
-    if [[ ${file} = ${exclude[${index}]} ]]; then
-      excluded=true
+link_if_absent() {
+  local source_path="$1" target_path="$2"
+  if [[ -L "$target_path" ]]; then
+    if [[ "$(readlink "$target_path")" == "$source_path" ]]; then
+      return 0
     fi
-  done
-  if [ ${excluded} = false ]; then
-    ln -sfn ${DIR}/${file} ${destPath}/${file}
   fi
+  if [[ -e "$target_path" || -L "$target_path" ]]; then
+    printf 'Keeping existing path: %s\n' "$target_path" >&2
+    return 0
+  fi
+  ln -s "$source_path" "$target_path"
+  printf 'Linked %s -> %s\n' "$target_path" "$source_path"
+}
+
+shopt -s dotglob nullglob
+for source_path in "$repo_dir"/*; do
+  name="${source_path##*/}"
+  case "$name" in
+    .config|.git|.gitignore|symlink.sh|README.md) continue ;;
+  esac
+  link_if_absent "$source_path" "$dest_dir/$name"
 done
-
-mkdir -p ${destPath}/.config # Create a .config folder if it doesn't already exist
-
-# Symlink files in .config directory
-for file in .config/*; do
-  ln -sfn ${DIR}/${file} ${destPath}/${file}
+for source_path in "$repo_dir"/.config/*; do
+  link_if_absent "$source_path" "$dest_dir/.config/${source_path##*/}"
 done
-
-# Special case for nvim
-ln -sfn "${DIR}/.vimrc" "${destPath}/.config/nvim/init.vim"

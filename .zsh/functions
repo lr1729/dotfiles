@@ -7,9 +7,24 @@ function ftex(){
   vim "$1".tex
 }
 
+# Prefer fzf, but allow skim on machines where it is already installed.
+function _dotfiles_fuzzy_select() {
+  if (( $+commands[fzf] )); then
+    command fzf "$@"
+  elif (( $+commands[sk] )); then
+    command sk "$@"
+  else
+    print -u2 'Directory/history picker requires fzf or skim.'
+    return 127
+  fi
+}
+
 function fad() {
-  local DIR
-  DIR=$(bfs \( -path ~/.wine -o -path ~/wine -o -path ~/linux-tkg \) -prune -false -o -f ~ -type d 2> /dev/null | sk --no-multi --preview='test -n "{}" && ls {}' -q "$*") && cd "$DIR"
+  local dir
+  dir=$(find "$HOME" \( -name .cache -o -name .git -o -name node_modules \
+      -o -name .wine -o -name wine -o -name linux-tkg \) -prune \
+      -o -type d -print 2>/dev/null | _dotfiles_fuzzy_select --no-multi --preview 'ls -ld -- {}' -q "$*") || return
+  [[ -n "$dir" ]] && cd -- "$dir"
 }
 
 function cpd(){
@@ -25,12 +40,15 @@ function cpd(){
 }
 
 function fd() {
-  local DIR
-  DIR=$(bfs \( -path ./.wine -o -path ./wine -o -path ./linux-tkg \) -prune -false -o -type d 2> /dev/null | sk --no-multi --preview='test -n "{}" && ls {}' -q "$*") && cd "$DIR"
+  local dir
+  dir=$(find . \( -name .git -o -name node_modules -o -name .wine       -o -name wine -o -name linux-tkg \) -prune       -o -type d -print 2>/dev/null | _dotfiles_fuzzy_select --no-multi --preview 'ls -ld -- {}' -q "$*") || return
+  [[ -n "$dir" ]] && cd -- "$dir"
 }
 
 function fh() {
-  print -z $(fc -l -r 1 | sk --no-multi -q "$*" | sed 's/ *[0-9]*\*\{0,1\} *//')
+  local choice
+  choice=$(fc -l -r 1 | _dotfiles_fuzzy_select --no-multi -q "$*" | sed 's/ *[0-9]*\*\{0,1\} *//') || return
+  [[ -n "$choice" ]] && print -z -- "$choice"
 }
 
 function ccsv() {
@@ -43,10 +61,18 @@ function ccs() {
 }
 
 function gacp() {
-    git add .
-    git commit -a -m "$1"
-    git push
+  if [[ -z "$1" ]]; then
+    print -u2 'Usage: gacp "commit message"'
+    return 2
+  fi
+  git add -A && git commit -m "$1" && git push
 }
 function lg() {
   nohup ~/.zsh/scripts/winview "$@" >/dev/null 2>&1 &
 }
+
+# >>> agent-multi >>>
+if [ -r "$HOME/.config/agent-multi/shell.sh" ]; then
+  source "$HOME/.config/agent-multi/shell.sh"
+fi
+# <<< agent-multi <<<

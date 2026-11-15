@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
-#source $HOME/.Merv_var
 
-temp_dev_path="/sys/devices/virtual/thermal"
-TEMP_DEV=thermal_zone0
+# Display thermal zone temperature, or report a missing sensor.
+temp_file="/sys/class/thermal/thermal_zone0/temp"
+if [[ ! -r "$temp_file" ]]; then
+  printf 'Temperature sensor unavailable\n' >&2
+  exit 1
+fi
 
-[[ -d $temp_dev_path/$TEMP_DEV ]] && \
-
-get_temp() {
-    CEL=$'\xc2\xb0C'
-    temp="$(cat $temp_dev_path/$TEMP_DEV/temp)"
-    temp="$(expr $temp / 1000)"
-    echo "$temp$CEL"
-}
-
-get_temp || echo "$TEMP_DEV not found!"; exit 1
+read -r millidegrees < "$temp_file"
+if [[ ! "$millidegrees" =~ ^[0-9]+$ ]]; then
+  printf 'Invalid temperature reading\n' >&2
+  exit 1
+fi
+printf '%d°C\n' "$((millidegrees / 1000))"

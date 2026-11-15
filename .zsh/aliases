@@ -29,9 +29,21 @@ alias diff='diff --color=auto'
 alias s=ssh
 alias t=tmux
 alias v=nvim
-alias ls='exa --color=always --group-directories-first'
+alias cc='nocorrect cc'
+alias cc-status='nocorrect cc-status'
+alias cc-login='nocorrect cc-login'
+alias cc-list='nocorrect cc-list'
+# eza supersedes the unmaintained exa; preserve a fallback for other hosts.
+if (( $+commands[eza] )); then
+  alias ls='eza --color=auto --group-directories-first'
+  alias ll='eza -la --color=auto --group-directories-first --git'
+elif (( $+commands[exa] )); then
+  alias ls='exa --color=auto --group-directories-first'
+  alias ll='exa -la --color=auto --group-directories-first --git'
+else
+  alias ll='ls -la'
+fi
 alias l='ls'
-alias ll='exa -la --color=always --group-directories-first --git'
 alias umirrir='sudo reflector --country US --verbose -l 200 -n 20 -p http --sort rate --save /etc/pacman.d/mirrorlist'
 
 #

@@ -3,8 +3,8 @@ export VISUAL=nvim
 
 # Add Android SDK to path
 export ANDROID_SDK=$HOME/Android/Sdk
-export PATH="$ANDROID_SDK/emulator:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools:$PATH"
-
-# Add pip packages to path
-path+=$HOME/.local/bin
+for android_bin in "$ANDROID_SDK/emulator" "$ANDROID_SDK/tools" "$ANDROID_SDK/platform-tools"; do
+  [[ -d "$android_bin" ]] && path=("$android_bin" $path)
+done
+unset android_bin
 [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh

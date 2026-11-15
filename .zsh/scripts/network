@@ -1,12 +1,23 @@
-#!/bin/bash
-INT=2
-RXDIR=/sys/class/net/wlo1/statistics/rx_bytes
-TXDIR=/sys/class/net/wlo1/statistics/tx_bytes
-RXSTART=$(cat $RXDIR)
-TXSTART=$(cat $TXDIR)
-sleep $INT
-RXEND=$(cat $RXDIR)
-TXEND=$(cat $TXDIR)
-RXBPS="$(echo $((RXEND-RXSTART)) | awk '{printf "%.1f",$1/(INT*131072)}' INT=$INT)"
-TXBPS="$(echo $((TXEND-TXSTART)) | awk '{printf "%.1f",$1/(INT*131072)}' INT=$INT)"
-echo "↓$RXBPS ↑$TXBPS Mib/s"
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Report traffic on the default-route interface, or the interface passed in $1.
+interface="${1:-}"
+if [[ -z "$interface" ]]; then
+  interface="$(ip -4 route show default 2>/dev/null | awk '{for (i=1; i<NF; i++) if ($i == "dev") {print $(i+1); exit}}')"
+fi
+stats="/sys/class/net/$interface/statistics"
+if [[ -z "$interface" || ! -r "$stats/rx_bytes" || ! -r "$stats/tx_bytes" ]]; then
+  printf 'No readable network interface found\n' >&2
+  exit 1
+fi
+
+interval=2
+read -r rx_start < "$stats/rx_bytes"
+read -r tx_start < "$stats/tx_bytes"
+sleep "$interval"
+read -r rx_end < "$stats/rx_bytes"
+read -r tx_end < "$stats/tx_bytes"
+
+awk -v rx="$((rx_end - rx_start))" -v tx="$((tx_end - tx_start))" -v t="$interval" \
+  'BEGIN { printf "↓%.1f ↑%.1f Mib/s\n", rx * 8 / t / 1048576, tx * 8 / t / 1048576 }'
