@@ -14,7 +14,7 @@ The installer is idempotent and **never overwrites existing files or links**. If
 ## Runtime dependencies
 
 - **Zsh** and its bundled autosuggestion/history/highlighting scripts; **eza** for enhanced listings (fallback to exa or standard `ls`).
-- **Neovim**, **vim-plug**, **git**, **ripgrep (`rg`)**, and **fzf** (or `sk` for directory/history pickers). For example, install `fzf` with the OS package manager, or `GOBIN="$HOME/.local/bin" go install github.com/junegunn/fzf@latest` when Go is installed.
+- **Neovim**, **vim-plug**, **git**, **ripgrep (`rg`)**, and **fzf** (or an externally installed `sk` for directory/history pickers). For example, install `fzf` with the OS package manager, or `GOBIN="$HOME/.local/bin" go install github.com/junegunn/fzf@latest` when Go is installed.
 - **Node.js** (working `node` in `PATH`) for CoC and Copilot, plus optional language-specific tools such as ESLint, Prettier, and LaTeX tooling.
 - Optional: Android SDK, conda, Conky, xbindkeys and xkeysnail, depending on machine.
 

@@ -243,11 +243,6 @@ source "$HOME/.zsh/exports"
 # Third-party
 #
 
-# Skim
-
-# test -e "$HOME/.zsh/skim/shell/key-bindings.zsh" && source "$HOME/.zsh/skim/shell/key-bindings.zsh"
-(( $+commands[sk] )) && [[ -r "$HOME/.zsh/skim/shell/completion.zsh" ]] && source "$HOME/.zsh/skim/shell/completion.zsh"
-
 #
 # Hooks
 #
